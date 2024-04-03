@@ -36,7 +36,7 @@ const getProfileProvider = async (req, res) => {
       req.params.id
     );
     // Checks if null
-    if (profileDataSensitive === null) {
+    if (profileDataSensitive == null) {
       res
         .status(400)
         .json({ status: "error", msg: "cannot find provider profile" });
