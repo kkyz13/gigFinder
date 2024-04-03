@@ -87,7 +87,7 @@ const Login = (props) => {
             </div>
             <div style={{ padding: "5px", width: "50%" }}>
               <input
-                ref={nameRef}
+                ref={phoneRef}
                 type="text"
                 className={`${styles.logininput}`}
                 placeholder="phone number"
@@ -95,9 +95,9 @@ const Login = (props) => {
             </div>
             <div style={{ padding: "5px", width: "75%" }}>
               <input
-                ref={nameRef}
+                ref={bioRef}
                 type="text"
-                className={`${styles.logininput}`}
+                className={`${styles.logininput} ${styles.bio}`}
                 placeholder="bio"
               ></input>
             </div>

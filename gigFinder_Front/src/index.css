@@ -49,6 +49,11 @@ body {
 .login {
   color: aliceblue;
   background-color: #57617b;
+  transition-duration: 0.5s;
+}
+
+.provider {
+  background-color: var(--provider-background-color);
 }
 .profileimg {
   height: 50px;
