@@ -17,6 +17,7 @@ const subscribeGigsListSchema = new mongoose.Schema(
 const UserAuthSchema = new mongoose.Schema(
   {
     name: { type: String, require: true },
+    profilePic: { type: String },
     biography: { type: String },
     phoneNumber: { type: String, require: true },
     email: { type: String, require: true, match: /.+\@.+\..+/, unique: true },

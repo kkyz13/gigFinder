@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
 const userAuth = require("./src/routers/userAuth");
+const providerAuth = require("./src/routers/providerAuth");
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -24,7 +25,8 @@ app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/auth", userAuth);
+app.use("/auth/u", userAuth);
+app.use("/auth/p", providerAuth);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

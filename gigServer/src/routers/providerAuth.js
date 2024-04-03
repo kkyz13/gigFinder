@@ -1,9 +1,10 @@
 const express = require("express");
-const { registerUser } = require("../controllers/userAuth");
+const { registerProvider } = require("../controllers/providerAuth");
 const { validateRegistrationData } = require("../validators/userAuth");
 const { errorCheck } = require("../validators/errorCheck");
+
 const router = express.Router();
 
-router.put("/register", validateRegistrationData, errorCheck, registerUser);
+router.put("/register", validateRegistrationData, errorCheck, registerProvider);
 
 module.exports = router;
