@@ -6,7 +6,7 @@ const getProfileUser = async (req, res) => {
     // Get profile data by id
     const profileDataSensitive = await UserAuthModel.findById(req.params.id);
     // Checks if null
-    if (profileDataSensitive === null) {
+    if (profileDataSensitive == null) {
       res
         .status(400)
         .json({ status: "error", msg: "cannot find user profile" });
