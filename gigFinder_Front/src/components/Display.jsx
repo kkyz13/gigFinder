@@ -3,6 +3,7 @@ import UserProfileModal from "./UserProfileModal";
 import UserContext from "../context/user";
 import GigDisplay from "./GigDisplay";
 import Login from "./Login";
+import GigListingEntry from "./GigListingEntry";
 
 const Display = () => {
   const [showUserProf, setShowUserProf] = useState(false);
@@ -36,8 +37,13 @@ const Display = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-6 eventlist">
-            <div className="container">Event list</div>
+          <div className="col-6 g-0 eventlist">
+            <div>
+              {/* MAP GETALLGIGS HERE */}
+              <GigListingEntry></GigListingEntry>
+              <GigListingEntry></GigListingEntry>
+              <GigListingEntry></GigListingEntry>
+            </div>
           </div>
           {showLogin && <Login setShowLogin={setShowLogin}></Login>}
           {!showLogin && <GigDisplay></GigDisplay>}
