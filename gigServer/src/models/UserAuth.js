@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const interestGigsListSchema = new mongoose.Schema(
   {
-    gigId: { type: mongoose.ObjectId, ref: "Events" },
+    gigId: { type: mongoose.ObjectId, ref: "Gigs" },
   },
   { collection: "interestGigsList" }
 );
 
 const subscribeGigsListSchema = new mongoose.Schema(
   {
-    gigId: { type: mongoose.ObjectId, ref: "Events" },
+    gigId: { type: mongoose.ObjectId, ref: "Gigs" },
   },
   { collection: "subscribeGigsList" }
 );
