@@ -78,11 +78,9 @@ const patchUser = async (req, res) => {
     // Get Data from refresh Token
     const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
     // Double check if profile exist and matches
-    const profileByJWT = await UserAuthModel.findOne({
-      id: decoded.id,
-    });
-    const profileByParams = await UserAuthModel.findOne({ id: req.params.id });
-    if (profileByJWT.id != profileByParams.id) {
+    const IdbyJWT = decoded.id;
+    const IdByParams = req.params.id;
+    if (IdbyJWT != IdByParams) {
       return res
         .status(400)
         .json({ status: "error", msg: "error finding profile to patching" });
