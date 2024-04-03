@@ -1,7 +1,7 @@
 import React from "react";
 
-const EventDisplay = () => {
+const GigDisplay = () => {
   return <div className="col-6 eventdisplay">Event Selected</div>;
 };
 
-export default EventDisplay;
+export default GigDisplay;

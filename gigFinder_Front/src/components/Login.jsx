@@ -25,7 +25,8 @@ const Login = (props) => {
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
       const decoded = jwtDecode(res.data.access);
-      userCtx.setRole(decoded.role);
+      userCtx.setRole(decoded.role); //we can hard code the role in
+      props.setShowLogin(false);
     } else {
       alert(JSON.stringify(res.data));
     }
@@ -39,9 +40,50 @@ const Login = (props) => {
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
       const decoded = jwtDecode(res.data.access);
-      userCtx.setRole(decoded.role);
+      userCtx.setRole(decoded.role); //we can hard code the role in
+      props.setShowLogin(false);
     } else {
       alert(JSON.stringify(res.data));
+    }
+  };
+
+  const handleRegistration = async () => {
+    if (role === "user") {
+      const res = await fetchData("/auth/u/register", "PUT", {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        name: nameRef.current.value,
+        biography: bioRef.current.value,
+        phoneNumber: phoneRef.current.value,
+      });
+      if (res.ok) {
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+        nameRef.current.value = "";
+        bioRef.current.value = "";
+        phoneRef.current.value = "";
+        setShowRegistration(false);
+      } else {
+        console.log(res.data);
+      }
+    } else if (role === "provider") {
+      const res = await fetchData("/auth/p/register", "PUT", {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        name: nameRef.current.value,
+        biography: bioRef.current.value,
+        phoneNumber: phoneRef.current.value,
+      });
+      if (res.ok) {
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+        nameRef.current.value = "";
+        bioRef.current.value = "";
+        phoneRef.current.value = "";
+        setShowRegistration(false);
+      } else {
+        console.log(res.data);
+      }
     }
   };
   return (
@@ -103,7 +145,10 @@ const Login = (props) => {
             </div>
             <UploadWidget></UploadWidget>
             <div style={{ padding: "5px" }}>
-              <button className={`${styles.loginbutton} ${styles.reg}`}>
+              <button
+                onClick={handleRegistration()}
+                className={`${styles.loginbutton} ${styles.reg}`}
+              >
                 Register
               </button>
               <button
@@ -150,6 +195,13 @@ const Login = (props) => {
             </>
           )}
         </div>
+        <button
+          onClick={() => {
+            props.setShowLogin(false);
+          }}
+        >
+          debug
+        </button>
       </div>
     </div>
   );

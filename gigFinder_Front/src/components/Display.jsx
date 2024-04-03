@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserProfileModal from "./UserProfileModal";
 import UserContext from "../context/user";
-import EventDisplay from "./EventDisplay";
+import GigDisplay from "./GigDisplay";
 import Login from "./Login";
 
 const Display = () => {
@@ -11,32 +11,38 @@ const Display = () => {
   const [showLogin, setShowLogin] = useState(true);
   return (
     <>
-      {showUserProf && (
-        <UserProfileModal
-          // id={props.id}
-          // name={props.name}
-          // bio={props.bio}
-          // phoneNumber={props.phoneNumber}
-          // email={props.email}
-          setShowUserProf={setShowUserProf}
-        ></UserProfileModal>
-      )}
-      <div className="topbar d-flex justify-content-between align-items-center g-0 m-0">
-        <p className="display-6">gigFinder</p>
-        <div>
-          username:
-          <img
-            src="../img/avatars/avatar_0002_blue.jpg"
-            className="profileimg"
-            onClick={() => setShowUserProf(true)}
-          />
+      <UserContext.Provider
+        value={{ accessToken, setAccessToken, role, setRole }}
+      >
+        {showUserProf && (
+          <UserProfileModal
+            // id={props.id}
+            // name={props.name}
+            // bio={props.bio}
+            // phoneNumber={props.phoneNumber}
+            // email={props.email}
+            setShowUserProf={setShowUserProf}
+          ></UserProfileModal>
+        )}
+        <div className="topbar d-flex justify-content-between align-items-center g-0 m-0">
+          <p className="display-6">gigFinder</p>
+          <div>
+            username:
+            <img
+              src="../img/avatars/avatar_0002_blue.jpg"
+              className="profileimg"
+              onClick={() => setShowUserProf(true)}
+            />
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-6 eventlist">Event list</div>
-        {showLogin && <Login setShowLogin={setShowLogin}></Login>}
-        {!showLogin && <EventDisplay></EventDisplay>}
-      </div>
+        <div className="row">
+          <div className="col-6 eventlist">
+            <div className="container">Event list</div>
+          </div>
+          {showLogin && <Login setShowLogin={setShowLogin}></Login>}
+          {!showLogin && <GigDisplay></GigDisplay>}
+        </div>
+      </UserContext.Provider>
     </>
   );
 };
