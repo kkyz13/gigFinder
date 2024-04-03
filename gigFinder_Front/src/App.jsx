@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import Display from "./components/Display";
+import UserContext from "./context/user";
 
 function App() {
   return (
     <div>
-      <h2>GigFinder</h2>
+      <Display></Display>
     </div>
   );
 }

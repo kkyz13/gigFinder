@@ -1,0 +1,17 @@
+.logininput {
+  border: none;
+  border-radius: 10px;
+  padding: 2px 5px;
+  width: 100%;
+}
+
+.loginbutton {
+  margin: 1rem;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+.reg {
+  background-color: aquamarine;
+}
