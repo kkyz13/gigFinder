@@ -1,6 +1,16 @@
 const GigsModel = require("../models/Gigs");
 const ProviderAuthModel = require("../models/ProviderAuth");
 
+const getAllGigs = async (req, res) => {
+  try {
+    const allGigs = await GigsModel.find();
+    res.json(allGigs);
+  } catch (error) {
+    console.error(error.message);
+    res.json({ Status: "error", msg: "getting all gigs error" });
+  }
+};
+
 // provider add gig
 const addGigForProvider = async (req, res) => {
   try {
@@ -38,4 +48,4 @@ const addGigForProvider = async (req, res) => {
   }
 };
 
-module.exports = { addGigForProvider };
+module.exports = { getAllGigs, addGigForProvider };
