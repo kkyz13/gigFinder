@@ -58,4 +58,27 @@ const addGigForProvider = async (req, res) => {
   }
 };
 
-module.exports = { getAllGigs, getGigById, addGigForProvider };
+const deleteGigForProvider = async (req, res) => {
+  try {
+    const provider = await ProviderAuthModel.findById(req.params.providerId);
+
+    await GigsModel.findByIdAndDelete(req.params.id);
+
+    // delete gig OID from hostGigsList array in providerAuth collection
+    const indexToDelete = provider.hostGigsList.indexOf(req.params.id);
+    provider.hostGigsList.splice(indexToDelete, 1);
+    await provider.save();
+
+    res.json({ status: "ok", msg: "gig deleted" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ status: "error", msg: "delete gig unsuccessful" });
+  }
+};
+
+module.exports = {
+  getAllGigs,
+  getGigById,
+  addGigForProvider,
+  deleteGigForProvider,
+};

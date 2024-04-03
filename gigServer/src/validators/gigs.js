@@ -20,4 +20,22 @@ const validateAddGigData = [
     .isLength({ max: 1000 }),
 ];
 
-module.exports = { validateAddGigData };
+const validateIdInParams = [
+  param("id", "id must be length 24").isLength({
+    min: 24,
+    max: 24,
+  }),
+];
+
+const validateProviderIdInParams = [
+  param("providerId", "providerId must be length 24").isLength({
+    min: 24,
+    max: 24,
+  }),
+];
+
+module.exports = {
+  validateAddGigData,
+  validateIdInParams,
+  validateProviderIdInParams,
+};
