@@ -11,6 +11,16 @@ const getAllGigs = async (req, res) => {
   }
 };
 
+const getGigById = async (req, res) => {
+  try {
+    const gig = await GigsModel.findById(req.params.id);
+    res.json(gig);
+  } catch (error) {
+    console.error(error.message);
+    res.json({ status: "error", msg: "getting gig by id error" });
+  }
+};
+
 // provider add gig
 const addGigForProvider = async (req, res) => {
   try {
@@ -48,4 +58,4 @@ const addGigForProvider = async (req, res) => {
   }
 };
 
-module.exports = { getAllGigs, addGigForProvider };
+module.exports = { getAllGigs, getGigById, addGigForProvider };
