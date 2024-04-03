@@ -11,9 +11,10 @@ const GigsSchema = new mongoose.Schema(
   {
     //-------------Required-----------------//
     title: { type: String, require: true, minLength: 1, maxLength: 50 },
-    author: { type: String, require: true, minLength: 1, maxLength: 50 },
-    timeStart: { type: Date, require: true },
+    author: { type: String, require: true, minLength: 24, maxLength: 24 },
+    dateTimeStart: { type: Date, require: true },
     //----------------(optional)---------------//
+    pic: { type: String },
     address: { type: String, minLength: 1, maxLength: 100 },
     link: { type: String },
     description: { type: String, maxLength: 1000 },
