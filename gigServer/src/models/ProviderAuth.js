@@ -1,12 +1,5 @@
 const mongoose = require("mongoose");
 
-const hostGigsListSchema = new mongoose.Schema(
-  {
-    gigId: { type: mongoose.ObjectId, ref: "Gigs" },
-  },
-  { collection: "hostGigsList" }
-);
-
 const ProviderAuthSchema = new mongoose.Schema(
   {
     name: { type: String, require: true },
@@ -15,7 +8,7 @@ const ProviderAuthSchema = new mongoose.Schema(
     phoneNumber: { type: String, require: true },
     email: { type: String, require: true, match: /.+\@.+\..+/, unique: true },
     hash: { type: String, require: true },
-    hostGigsList: [hostGigsListSchema],
+    hostGigsList: [{ type: mongoose.ObjectId, ref: "Gigs" }],
   },
   { collection: "providerAuth" }
 );
