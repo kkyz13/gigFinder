@@ -7,7 +7,6 @@ const {
 } = require("../controllers/userAuth");
 const {
   validateRegistrationData,
-  validatePatchData,
   validateParamId,
 } = require("../validators/userAuth");
 const { errorCheck } = require("../validators/errorCheck");
@@ -17,6 +16,6 @@ router.put("/register", validateRegistrationData, errorCheck, registerUser);
 router.post("/login", errorCheck, loginUser);
 router.get("/refresh", errorCheck, refreshUser);
 //Validate for patch user data does not work... yet.
-router.patch("/:id", validateParamId, validatePatchData, errorCheck, patchUser);
+router.patch("/:id", validateParamId, errorCheck, patchUser);
 
 module.exports = router;
