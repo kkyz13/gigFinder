@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState } from "react";
 import styles from "./Login.module.css";
 import useFetch from "../hooks/useFetch";
-
+import UploadWidget from "./UploadWidget";
 import UserContext from "../context/user";
 import { jwtDecode } from "jwt-decode";
 
@@ -101,7 +101,11 @@ const Login = (props) => {
                 placeholder="bio"
               ></input>
             </div>
+            <UploadWidget></UploadWidget>
             <div style={{ padding: "5px" }}>
+              <button className={`${styles.loginbutton} ${styles.reg}`}>
+                Register
+              </button>
               <button
                 onClick={() => {
                   setShowRegistration(false);
@@ -113,45 +117,39 @@ const Login = (props) => {
             </div>
           </>
         )}
-        {!showRegistration && role === "user" ? (
-          <div style={{ padding: "5px" }}>
-            <button
-              onClick={() => {
-                handleUserLogin();
-              }}
-              className={`${styles.loginbutton}`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => {
-                setShowRegistration(true);
-              }}
-              className={`${styles.loginbutton} ${styles.reg}`}
-            >
-              Register
-            </button>
-          </div>
-        ) : (
-          <div style={{ padding: "5px" }}>
-            <button
-              onClick={() => {
-                handleProviderLogin();
-              }}
-              className={`${styles.loginbutton}`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => {
-                setShowRegistration(true);
-              }}
-              className={`${styles.loginbutton} ${styles.reg}`}
-            >
-              Register
-            </button>
-          </div>
-        )}
+        <div style={{ padding: "0px" }}>
+          {!showRegistration && (
+            <>
+              {role === "user" ? (
+                <button
+                  onClick={() => {
+                    handleUserLogin();
+                  }}
+                  className={`${styles.loginbutton}`}
+                >
+                  Login
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    handleProviderLogin();
+                  }}
+                  className={`${styles.loginbutton}`}
+                >
+                  Login
+                </button>
+              )}
+              <button
+                onClick={() => {
+                  setShowRegistration(true);
+                }}
+                className={`${styles.loginbutton} ${styles.reg}`}
+              >
+                Register
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
