@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.put("/register", validateRegistrationData, errorCheck, registerUser);
 router.post("/login", errorCheck, loginUser);
-router.get("/refresh", errorCheck, refreshUser);
+router.post("/refresh", errorCheck, refreshUser);
 //Validate for patch user data does not work... yet.
 router.patch("/:id", validateParamId, errorCheck, patchUser);
 

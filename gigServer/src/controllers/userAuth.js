@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
 
     const hash = await bcrypt.hash(req.body.password, 12);
     await UserAuthModel.create({
-      name: req.body.email,
+      name: req.body.name,
       // profilePic: req.body.profilePic,
       biography: req.body.biography,
       phoneNumber: req.body.phoneNumber,
