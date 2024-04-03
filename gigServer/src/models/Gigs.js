@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 //   { collection: "userList" }
 // );
 
-const EventsSchema = new mongoose.Schema(
+const GigsSchema = new mongoose.Schema(
   {
     //-------------Required-----------------//
     title: { type: String, require: true, minLength: 1, maxLength: 50 },
@@ -20,7 +20,7 @@ const EventsSchema = new mongoose.Schema(
     // interestUserList: [userListSchema],
     // subscribeUserList: [userListSchema],
   },
-  { collection: "events" }
+  { collection: "gigs" }
 );
 
-module.exports = mongoose.model("Events", EventsSchema);
+module.exports = mongoose.model("Gigs", GigsSchema);
