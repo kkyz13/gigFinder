@@ -13,6 +13,7 @@ const registerUser = async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 12);
     await UserAuthModel.create({
       name: req.body.email,
+      // profilePic: req.body.profilePic,
       biography: req.body.biography,
       phoneNumber: req.body.phoneNumber,
       email: req.body.email,
@@ -89,6 +90,7 @@ const patchUser = async (req, res) => {
       // Create what data to update.
       const updateProfile = {};
       if ("name" in req.body) updateProfile.name = req.body.name;
+      //  if ("profilePic" in req.body) updateProfile.profilePic = req.body.profilePic,
       if ("biography" in req.body) updateProfile.biography = req.body.biography;
       if ("phoneNumber" in req.body)
         updateProfile.phoneNumber = req.body.phoneNumber;

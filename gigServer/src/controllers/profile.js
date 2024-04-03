@@ -14,6 +14,7 @@ const getProfileUser = async (req, res) => {
       // Safe way to remove hash/password from profile data so public can view
       const profileDataSafe = {
         name: profileDataSensitive.name,
+        // profilePic: profileDataSensitive.profilePic,
         biography: profileDataSensitive.biography,
         phoneNumber: profileDataSensitive.phoneNumber,
         email: profileDataSensitive.email,
@@ -44,6 +45,7 @@ const getProfileProvider = async (req, res) => {
       // Safe way to remove hash/password from profile data so public can view
       const profileDataSafe = {
         name: profileDataSensitive.name,
+        // profilePic: profileDataSensitive.profilePic,
         biography: profileDataSensitive.biography,
         phoneNumber: profileDataSensitive.phoneNumber,
         email: profileDataSensitive.email,
