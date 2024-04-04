@@ -6,10 +6,7 @@ const validateAddGigData = [
     min: 24,
     max: 24,
   }),
-  body("dateStart", "start date is required").not().isEmpty(),
-  body("dateStart", "start date must be in this format YYYY-MM-DD").isDate(),
-  body("timeStart", "start time is required").not().isEmpty(),
-  body("timeStart", "time must be in this format HH:MM").isTime(),
+  body("dateTimeStart", "start date and time is required").not().isEmpty(),
   body("address", "address is required").optional().not().isEmpty(),
   body("address", "address must be between 1 and 100 characters")
     .optional()
