@@ -78,7 +78,8 @@ const Display = () => {
           )}
         </div>
         <div className="row z-n1">
-          <div className="col-6 g-0 eventlist">
+          <div className="col-6 g-0 giglist">
+            {role === "provider" && <button className="newgigbtn">+</button>}
             {gigsArr.length !== 0 &&
               gigsArr.map((entry, id) => {
                 return (

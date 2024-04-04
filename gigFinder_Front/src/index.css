@@ -13,6 +13,7 @@ html {
 body {
   margin: 0;
   background-color: whitesmoke;
+  overflow: hidden;
 }
 .topbar {
   color: white;
@@ -35,17 +36,35 @@ body {
   align-items: center;
 }
 
-.eventlist {
+.newgigbtn {
+  transition: 0.3s;
+  position: absolute;
+  right: 57%;
+  bottom: 10%;
+  padding: 1px 12px;
+  border: none;
+  border-radius: 45%;
+  background-color: #cf8383;
+  color: whitesmoke;
+  font-size: xx-large;
+  z-index: 4;
+  box-shadow: 2px 2px 5px #4733474f;
+}
+.newgigbtn:hover {
+  transform: translateY(-5px);
+  background-color: #b37478;
+}
+.giglist {
   background-color: rgb(206, 208, 236);
-  height: 90vh;
+  height: 95vh;
   z-index: 2;
 
   overflow-y: scroll;
   scrollbar-width: thin;
 }
-.eventdisplay {
+.gigdisplay {
   background-color: rgb(178, 193, 136);
-  height: 90vh;
+  height: 95vh;
   z-index: 2;
 }
 .entry {
@@ -60,7 +79,8 @@ body {
   cursor: pointer;
 }
 .entry img {
-  height: 120px;
+  width: 120px;
+  object-fit: contain;
 }
 .selected {
   background-color: bisque;

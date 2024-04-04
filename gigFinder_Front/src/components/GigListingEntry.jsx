@@ -20,7 +20,14 @@ const GigListingEntry = (props) => {
         <div>
           <strong>{props.title}</strong>
         </div>
-        <div>{d.toLocaleString("en-SG", { timeZone: "Asia/Singapore" })}</div>
+        <div>
+          {new Intl.DateTimeFormat("en-GB", {
+            dateStyle: "medium",
+            timeStyle: "short",
+            timeZone: "Asia/Singapore",
+          }).format(d)}
+        </div>
+        {/* <div>{d.toLocaleString("en-SG", { timeZone: "Asia/Singapore" })}</div> */}
         <div className="line-clamp" style={{ Height: "100px" }}>
           {props.description}
         </div>
