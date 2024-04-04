@@ -18,7 +18,6 @@ const {
   validateProviderIdInParams,
 } = require("../validators/gigs");
 const { errorCheck } = require("../validators/errorCheck");
-const { validateIdInParams } = require("../validators/gigs");
 const { authUserProvider } = require("../middleware/auth");
 const router = express.Router();
 
@@ -28,7 +27,7 @@ router.put(
   "/gigs/p/:providerId",
   authUserProvider,
   validateAddGigData,
-  validateIdInParams,
+  validateProviderIdInParams,
   errorCheck,
   addGigForProvider
 );
