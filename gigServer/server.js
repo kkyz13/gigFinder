@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
 const userAuth = require("./src/routers/userAuth");
-// const profile = require("./src/routers/profile");
+const profile = require("./src/routers/profile");
 const providerAuth = require("./src/routers/providerAuth");
 const gigs = require("./src/routers/gigs");
 const seed = require("./src/routers/seed");
@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/auth/u", userAuth);
-// app.use("/profile", profile);
+app.use("/profile", profile);
 app.use("/auth/p", providerAuth);
 app.use("/api", gigs);
 app.use("/api", seed);
