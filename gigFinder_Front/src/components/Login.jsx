@@ -97,7 +97,9 @@ const Login = (props) => {
     }
   };
   return (
-    <div className="col-6 login pt-5">
+    <div
+      className={`col-6 login pt-5 ${role === "provider" ? "providerbg" : ""}`}
+    >
       <div className="d-flex flex-column justify-content-center centered">
         <div className="display-6">gigFinder</div>
         <div style={{ padding: "20px" }}>

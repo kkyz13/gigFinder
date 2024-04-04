@@ -69,6 +69,8 @@ body {
   -webkit-box-orient: vertical;
 }
 .login {
+  transition-duration: 0.5;
+  transition-timing-function: ease-out;
   color: aliceblue;
   background-color: #57617b;
 }
@@ -77,4 +79,9 @@ body {
   margin-left: 10px;
   margin-bottom: 2px;
   border-radius: 50%;
+}
+
+.providerbg {
+  transition: all;
+  background-color: #835252;
 }
