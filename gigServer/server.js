@@ -11,6 +11,7 @@ const userAuth = require("./src/routers/userAuth");
 // const profile = require("./src/routers/profile");
 const providerAuth = require("./src/routers/providerAuth");
 const gigs = require("./src/routers/gigs");
+const seed = require("./src/routers/seed");
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -31,6 +32,7 @@ app.use("/auth/u", userAuth);
 // app.use("/profile", profile);
 app.use("/auth/p", providerAuth);
 app.use("/api", gigs);
+app.use("/api", seed);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

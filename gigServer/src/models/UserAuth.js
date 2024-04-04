@@ -22,8 +22,8 @@ const UserAuthSchema = new mongoose.Schema(
     phoneNumber: { type: String, require: true },
     email: { type: String, require: true, match: /.+\@.+\..+/, unique: true },
     hash: { type: String, require: true },
-    interestGigsList: [interestGigsListSchema],
-    subscribeGigsList: [subscribeGigsListSchema],
+    interestGigsList: [{ type: mongoose.ObjectId, ref: "Gigs" }],
+    subscribeGigsList: [{ type: mongoose.ObjectId, ref: "Gigs" }],
   },
   { collection: "userAuth" }
 );
