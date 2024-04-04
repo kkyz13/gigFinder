@@ -4,8 +4,12 @@ const {
   getAllGigs,
   getGigById,
   deleteGigForProvider,
+  updateGigForProvider,
 } = require("../controllers/gigs");
-const { validateAddGigData } = require("../validators/gigs");
+const {
+  validateAddGigData,
+  validateUpdateGigData,
+} = require("../validators/gigs");
 const { errorCheck } = require("../validators/errorCheck");
 const { validateIdInParams } = require("../validators/gigs");
 const { validateProviderIdInParams } = require("../validators/gigs");
@@ -25,6 +29,12 @@ router.delete(
   validateIdInParams,
   errorCheck,
   deleteGigForProvider
+);
+router.patch(
+  "/gigs/:id",
+  validateUpdateGigData,
+  errorCheck,
+  updateGigForProvider
 );
 
 module.exports = router;
