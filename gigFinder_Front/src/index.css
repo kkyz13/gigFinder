@@ -38,7 +38,7 @@ body {
 .eventlist {
   background-color: rgb(206, 208, 236);
   height: 90vh;
-  z-index: 20;
+  z-index: 2;
 
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -46,9 +46,10 @@ body {
 .eventdisplay {
   background-color: rgb(178, 193, 136);
   height: 90vh;
-  z-index: 20;
+  z-index: 2;
 }
 .entry {
+  z-index: 3;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   margin: 3px 5px 3px 5px;
@@ -61,7 +62,9 @@ body {
 .entry img {
   height: 120px;
 }
-
+.selected {
+  background-color: bisque;
+}
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;

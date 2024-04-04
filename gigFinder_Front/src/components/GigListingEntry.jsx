@@ -2,15 +2,15 @@ import React from "react";
 
 const GigListingEntry = (props) => {
   const d = new Date(props.dateTime);
-  const handleGigSelect = () => {
-    console.log("click!");
+  const handleGigSelect = (e) => {
+    // e.target.classList.add("selected");
     props.setGigSelect(props.id);
   };
   return (
     <div
       className="entry d-flex"
-      onClick={() => {
-        console.log("CLICKSSSS!");
+      onClick={(e) => {
+        handleGigSelect(e);
       }}
     >
       <div>
@@ -24,13 +24,6 @@ const GigListingEntry = (props) => {
         <div className="line-clamp" style={{ Height: "100px" }}>
           {props.description}
         </div>
-        <button
-          onClick={() => {
-            console.log("button clicked");
-          }}
-        >
-          help me
-        </button>
       </div>
     </div>
   );
