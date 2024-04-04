@@ -69,9 +69,29 @@ const deleteGigForProvider = async (req, res) => {
   }
 };
 
+const updateGigForProvider = async (req, res) => {
+  try {
+    const updateGig = {};
+    if ("title" in req.body) updateGig.title = req.body.title;
+    if ("dateTimeStart" in req.body)
+      updateGig.dateTimeStart = req.body.dateTimeStart;
+    if ("pic" in req.body) updateGig.pic = req.body.pic;
+    if ("address" in req.body) updateGig.address = req.body.address;
+    if ("link" in req.body) updateGig.link = req.body.link;
+    if ("description" in req.body) updateGig.description = req.body.description;
+
+    await GigsModel.findByIdAndUpdate(req.params.id, updateGig);
+    res.json({ status: "ok", msg: "gig updated" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ status: "error", msg: "update gig unsuccessful" });
+  }
+};
+
 module.exports = {
   getAllGigs,
   getGigById,
   addGigForProvider,
   deleteGigForProvider,
+  updateGigForProvider,
 };

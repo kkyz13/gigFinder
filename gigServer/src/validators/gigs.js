@@ -17,6 +17,22 @@ const validateAddGigData = [
     .isLength({ max: 1000 }),
 ];
 
+const validateUpdateGigData = [
+  body("title", "title is required").optional().not().isEmpty(),
+  body("dateTimeStart", "start date and time is required")
+    .optional()
+    .not()
+    .isEmpty(),
+  body("address", "address is required").optional().not().isEmpty(),
+  body("address", "address must be between 1 and 100 characters")
+    .optional()
+    .isLength({ min: 1, max: 100 }),
+  body("link", "link is required").optional().not().isEmpty(),
+  body("description", "description must be less that 1000 characters")
+    .optional()
+    .isLength({ max: 1000 }),
+];
+
 const validateIdInParams = [
   param("id", "id must be length 24").isLength({
     min: 24,
@@ -33,6 +49,7 @@ const validateProviderIdInParams = [
 
 module.exports = {
   validateAddGigData,
+  validateUpdateGigData,
   validateIdInParams,
   validateProviderIdInParams,
 };
