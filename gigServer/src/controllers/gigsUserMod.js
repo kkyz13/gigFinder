@@ -7,7 +7,6 @@ const getAllUsersOfGig = async (req, res) => {
     const allUsersOfGigs = await GigsModel.findById(req.params.id)
       .populate("interestUserList subscribeUserList", "name")
       .exec();
-    // TODO, cut it so that  only 2 arrays of user names is sent.
     res.json({
       interestUserList: allUsersOfGigs.interestUserList,
       subscribeUserList: allUsersOfGigs.subscribeUserList,
