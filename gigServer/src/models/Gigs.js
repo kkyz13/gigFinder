@@ -11,7 +11,8 @@ const GigsSchema = new mongoose.Schema(
   {
     //-------------Required-----------------//
     title: { type: String, require: true, minLength: 1, maxLength: 50 },
-    author: { type: String, require: true, minLength: 24, maxLength: 24 },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "ProviderAuth" },
+    // author: { type: String, require: true, minLength: 24, maxLength: 24 },
     dateTimeStart: { type: Date, require: true },
     //----------------(optional)---------------//
     pic: { type: String },

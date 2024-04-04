@@ -3,7 +3,7 @@ const ProviderAuthModel = require("../models/ProviderAuth");
 
 const getAllGigs = async (req, res) => {
   try {
-    const allGigs = await GigsModel.find();
+    const allGigs = await GigsModel.find().populate("author", "name").exec();
     res.json(allGigs);
   } catch (error) {
     console.error(error.message);
@@ -13,7 +13,7 @@ const getAllGigs = async (req, res) => {
 
 const getGigById = async (req, res) => {
   try {
-    const gig = await GigsModel.findById(req.params.id);
+    const gig = await GigsModel.findById(req.params.id).populate("author");
     res.json(gig);
   } catch (error) {
     console.error(error.message);
