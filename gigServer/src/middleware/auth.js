@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const authUser = (req, res, next) => {
+const authUserProvider = (req, res, next) => {
   if (!("authorization" in req.headers)) {
     return res.status(400).json({ status: "error", msg: "no token found" });
   }
@@ -43,4 +43,4 @@ const authAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { authUser, authAdmin };
+module.exports = { authUserProvider, authAdmin };
