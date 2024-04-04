@@ -5,11 +5,13 @@ const jwt = require("jsonwebtoken");
 const getAllUsersOfGig = async (req, res) => {
   try {
     const allUsersOfGigs = await GigsModel.findById(req.params.id)
-      .populate("interestUserList", "name")
-      //   .populate("subscribeGigsList", "name")
+      .populate("interestUserList subscribeUserList", "name")
       .exec();
     // TODO, cut it so that  only 2 arrays of user names is sent.
-    res.json(allUsersOfGigs);
+    res.json({
+      interestUserList: allUsersOfGigs.interestUserList,
+      subscribeUserList: allUsersOfGigs.subscribeUserList,
+    });
   } catch (error) {
     console.error(error.message);
     res
