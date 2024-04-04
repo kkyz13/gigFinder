@@ -1,22 +1,36 @@
 import React from "react";
 
 const GigListingEntry = (props) => {
+  const d = new Date(props.dateTime);
+  const handleGigSelect = () => {
+    console.log("click!");
+    props.setGigSelect(props.id);
+  };
   return (
-    <div className="entry d-flex">
+    <div
+      className="entry d-flex"
+      onClick={() => {
+        console.log("CLICKSSSS!");
+      }}
+    >
       <div>
-        <img src="../img/gigimg/placeholder.jpg"></img>
+        <img src={`${props.pic}` || `../img/gigimg/placeholder.jpg`}></img>
       </div>
       <div className="container d-flex-column">
         <div>
-          <strong>GigTitle</strong>
+          <strong>{props.title}</strong>
         </div>
-        <div>Time | Date</div>
-        {/*use .toLocaleString('en-SG', { timeZone: 'Asia/Singapore' });  */}
+        <div>{d.toLocaleString("en-SG", { timeZone: "Asia/Singapore" })}</div>
         <div className="line-clamp" style={{ Height: "100px" }}>
-          I am the description that can be very long so this is delibrately
-          making it long so I can see if it breaks I am the description that can
-          be very long to break this line and very long shit
+          {props.description}
         </div>
+        <button
+          onClick={() => {
+            console.log("button clicked");
+          }}
+        >
+          help me
+        </button>
       </div>
     </div>
   );

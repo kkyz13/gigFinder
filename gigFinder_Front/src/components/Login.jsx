@@ -75,6 +75,7 @@ const Login = (props) => {
         setMessage("Registration Successful");
       } else {
         console.log(res.data);
+        setMessage(res.data);
       }
     } else if (role === "provider") {
       const res = await fetchData("/auth/p/register", "PUT", {
@@ -93,6 +94,7 @@ const Login = (props) => {
         setShowRegistration(false);
       } else {
         console.log(res.data);
+        setMessage(res.data);
       }
     }
   };
