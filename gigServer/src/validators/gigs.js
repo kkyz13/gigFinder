@@ -2,10 +2,6 @@ const { body, param } = require("express-validator");
 
 const validateAddGigData = [
   body("title", "title is required").not().isEmpty(),
-  param("providerId", "author must be length 24").isLength({
-    min: 24,
-    max: 24,
-  }),
   body("dateTimeStart", "start date and time is required").not().isEmpty(),
   body("address", "address is required").optional().not().isEmpty(),
   body("address", "address must be between 1 and 100 characters")
