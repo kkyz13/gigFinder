@@ -15,6 +15,7 @@ const Login = (props) => {
   const bioRef = useRef();
   const phoneRef = useRef();
   const [role, setRole] = useState("user");
+  const [message, setMessage] = useState("");
 
   const handleUserLogin = async () => {
     const res = await fetchData("/auth/u/login", "POST", {
@@ -25,10 +26,14 @@ const Login = (props) => {
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
       const decoded = jwtDecode(res.data.access);
-      userCtx.setRole(decoded.role); //we can hard code the role in
+      console.log(decoded);
+      userCtx.setRole(decoded.role);
+      userCtx.setUserId(decoded.id);
+      userCtx.setUserEmail(decoded.email);
       props.setShowLogin(false);
     } else {
       alert(JSON.stringify(res.data));
+      setMessage("login error");
     }
   };
   const handleProviderLogin = async () => {
@@ -40,10 +45,14 @@ const Login = (props) => {
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
       const decoded = jwtDecode(res.data.access);
-      userCtx.setRole(decoded.role); //we can hard code the role in
+      console.log(decoded);
+      userCtx.setRole(decoded.role);
+      userCtx.setUserId(decoded.id);
+      userCtx.setUserEmail(decoded.email);
       props.setShowLogin(false);
     } else {
       alert(JSON.stringify(res.data));
+      setMessage("login error");
     }
   };
 
@@ -63,6 +72,7 @@ const Login = (props) => {
         bioRef.current.value = "";
         phoneRef.current.value = "";
         setShowRegistration(false);
+        setMessage("Registration Successful");
       } else {
         console.log(res.data);
       }
@@ -87,7 +97,7 @@ const Login = (props) => {
     }
   };
   return (
-    <div className="col-6 login">
+    <div className="col-6 login pt-5">
       <div className="d-flex flex-column justify-content-center centered">
         <div className="display-6">gigFinder</div>
         <div style={{ padding: "20px" }}>
@@ -129,7 +139,7 @@ const Login = (props) => {
             </div>
             <div style={{ padding: "5px", width: "50%" }}>
               <input
-                ref={nameRef}
+                ref={phoneRef}
                 type="text"
                 className={`${styles.logininput}`}
                 placeholder="phone number"
@@ -137,7 +147,7 @@ const Login = (props) => {
             </div>
             <div style={{ padding: "5px", width: "75%" }}>
               <input
-                ref={nameRef}
+                ref={bioRef}
                 type="text"
                 className={`${styles.logininput}`}
                 placeholder="bio"
@@ -146,7 +156,7 @@ const Login = (props) => {
             <UploadWidget></UploadWidget>
             <div style={{ padding: "5px" }}>
               <button
-                onClick={handleRegistration()}
+                onClick={() => handleRegistration()}
                 className={`${styles.loginbutton} ${styles.reg}`}
               >
                 Register
@@ -195,6 +205,7 @@ const Login = (props) => {
             </>
           )}
         </div>
+        <p>{message}</p>
         <button
           onClick={() => {
             props.setShowLogin(false);

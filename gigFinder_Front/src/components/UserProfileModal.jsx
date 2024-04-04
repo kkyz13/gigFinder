@@ -16,7 +16,15 @@ const OverLay = (props) => {
         <div className={styles.content}>
           <p>User Stuff here</p>
         </div>
-        <div className={styles.actions}></div>
+        <div className={styles.actions}>
+          <button
+            onClick={() => {
+              props.handleLogOut(true);
+            }}
+          >
+            Log Out
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -32,6 +40,7 @@ const UserProfileModal = (props) => {
           phoneNumber={props.phoneNumber}
           email={props.email}
           setShowUserProf={props.setShowUserProf}
+          handleLogOut={props.handleLogOut}
         />,
         document.querySelector("#modal-root")
       )}

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/user";
 
 const GigDisplay = () => {
-  return <div className="col-6 eventdisplay">Event Selected</div>;
+  const userCtx = useContext(UserContext);
+  return (
+    <div className="col-6 eventdisplay">
+      <div>accesstoken: {userCtx.accessToken}</div>
+      <div>role: {userCtx.role}</div>
+      <div>userId: {userCtx.userId}</div>
+    </div>
+  );
 };
 
 export default GigDisplay;
