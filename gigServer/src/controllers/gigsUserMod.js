@@ -47,49 +47,39 @@ const putUserInGig = async (req, res) => {
       // Check if items is in the arrays, protect the database.
       // Push items to the two arrays.
       if (req.body.list === "interestUserList") {
-        console.log(req.body.list);
-
-        const isUserInGig = await theGig.find({
-          interestUserList: req.body.id,
-        });
-        if (isUserInGig) {
+        const isUserInGig = await theGig.interestUserList.includes(req.body.id);
+        if (!isUserInGig) {
           await GigsModel.findByIdAndUpdate(req.params.id, {
             $push: { interestUserList: req.body.id },
           });
         }
 
-        const isGigInUser = await theUser.find({
-          interestGigsList: req.params.id,
-        });
-        if (isGigInUser) {
+        const isGigInUser = await theUser.interestGigsList.includes(
+          req.params.id
+        );
+        if (!isGigInUser) {
           await UserAuthModel.findByIdAndUpdate(req.body.id, {
             $push: { interestGigsList: req.params.id },
           });
         }
-
-        console.log(req.body.list + "done");
       } else {
-        console.log(req.body.list);
-
-        const isUserInGig = await theGig.find({
-          subscribeUserList: req.body.id,
-        });
-        if (isUserInGig) {
+        const isUserInGig = await theGig.subscribeUserList.includes(
+          req.body.id
+        );
+        if (!isUserInGig) {
           await GigsModel.findByIdAndUpdate(req.params.id, {
             $push: { subscribeUserList: req.body.id },
           });
         }
 
-        const isGigInUser = await theUser.find({
-          subscribeGigsList: req.params.id,
-        });
+        const isGigInUser = await theUser.subscribeGigsList.includes(
+          req.params.id
+        );
         if (isGigInUser) {
           await UserAuthModel.findByIdAndUpdate(req.body.id, {
             $push: { subscribeGigsList: req.params.id },
           });
         }
-
-        console.log(req.body.list + "done");
       }
       return res.json(
         decoded.email + " added to " + req.params.id + " " + req.body.list
