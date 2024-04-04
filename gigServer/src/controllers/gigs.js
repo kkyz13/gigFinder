@@ -24,20 +24,13 @@ const getGigById = async (req, res) => {
 // provider add gig
 const addGigForProvider = async (req, res) => {
   try {
-    const inputStartDate = req.body.dateStart;
-    const inputStartTime = req.body.timeStart;
-
-    const dateTime = new Date(
-      `${inputStartDate}T${inputStartTime}:00.493+00:00`
-    );
-
     const provider = await ProviderAuthModel.findById(req.params.providerId);
 
     // create a new GigsModel instance with the provided data
     const newGig = new GigsModel({
       title: req.body.title,
       author: provider._id,
-      dateTimeStart: dateTime,
+      dateTimeStart: req.body.dateTimeStart,
       pic: req.body.pic,
       address: req.body.address,
       link: req.body.link,
