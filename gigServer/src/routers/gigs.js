@@ -22,7 +22,13 @@ const { authUserProvider } = require("../middleware/auth");
 const router = express.Router();
 
 router.get("/gigs", getAllGigs);
-router.post("/gigs/:id", validateIdInParams, errorCheck, getGigById);
+router.post(
+  "/gigs/:id",
+  authUserProvider,
+  validateIdInParams,
+  errorCheck,
+  getGigById
+);
 router.put(
   "/gigs/p/:providerId",
   authUserProvider,

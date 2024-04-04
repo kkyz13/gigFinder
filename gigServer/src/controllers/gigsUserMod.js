@@ -6,7 +6,7 @@ const getAllUsersOfGig = async (req, res) => {
   try {
     const allUsersOfGigs = await GigsModel.findById(req.params.id)
       .populate("interestUserList", "name")
-      .populate("subscribeGigsList", "name")
+      //   .populate("subscribeGigsList", "name")
       .exec();
     // TODO, cut it so that  only 2 arrays of user names is sent.
     res.json(allUsersOfGigs);
@@ -30,14 +30,14 @@ const putUserInGig = async (req, res) => {
       });
     } else {
       // Check if gig exist, protect the database.
-      const theGig = await GigsModel.findOne(req.params.id);
+      const theGig = await GigsModel.findOne({ _id: req.params.id });
       if (!theGig) {
         return res
           .status(400)
           .json({ status: "error", msg: "gig doesn't exist" });
       }
       // Check if user exist, protect the database.
-      const theUser = await UserAuthModel.findOne(req.body.id);
+      const theUser = await UserAuthModel.findOne({ _id: req.body.id });
       if (!theUser) {
         return res
           .status(400)
