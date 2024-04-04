@@ -105,14 +105,14 @@ const deleteUserInGig = async (req, res) => {
       });
     } else {
       // Check if gig exist, protect the database.
-      const theGig = await GigsModel.findOne(req.params.id);
+      const theGig = await GigsModel.findOne({ _id: req.params.id });
       if (!theGig) {
         return res
           .status(400)
           .json({ status: "error", msg: "gig doesn't exist" });
       }
       // Check if user exist, protect the database.
-      const theUser = await UserAuthModel.findOne(req.body.id);
+      const theUser = await UserAuthModel.findOne({ _id: req.body.id });
       if (!theUser) {
         return res
           .status(400)
@@ -124,57 +124,55 @@ const deleteUserInGig = async (req, res) => {
       if (req.body.list === "interestUserList") {
         console.log(req.body.list);
 
-        const isUserInGig = await theGig.find({
-          interestUserList: req.body.id,
-        });
+        const isUserInGig = await theGig.interestUserList.includes(req.body.id);
         if (isUserInGig) {
           await GigsModel.findByIdAndUpdate(req.params.id, {
-            $pullAll: { interestUserList: req.body.id },
+            $pull: { interestUserList: req.body.id },
           });
         }
 
-        const isGigInUser = await theUser.find({
-          interestGigsList: req.params.id,
-        });
+        const isGigInUser = await theUser.interestGigsList.includes(
+          req.params.id
+        );
         if (isGigInUser) {
           await UserAuthModel.findByIdAndUpdate(req.body.id, {
-            $pullAll: { interestGigsList: req.params.id },
+            $pull: { interestGigsList: req.params.id },
           });
         }
 
-        console.log(req.body.list + "done");
+        console.log(req.body.list + "done delete");
       } else {
         console.log(req.body.list);
 
-        const isUserInGig = await theGig.find({
-          subscribeUserList: req.body.id,
-        });
+        const isUserInGig = await theGig.subscribeUserList.includes(
+          req.body.id
+        );
         if (isUserInGig) {
           await GigsModel.findByIdAndUpdate(req.params.id, {
-            $pullAll: { subscribeUserList: req.body.id },
+            $pull: { subscribeUserList: req.body.id },
           });
         }
 
-        const isGigInUser = await theUser.find({
-          subscribeGigsList: req.params.id,
-        });
+        const isGigInUser = await theUser.subscribeGigsList.includes(
+          req.params.id
+        );
         if (isGigInUser) {
           await UserAuthModel.findByIdAndUpdate(req.body.id, {
-            $pullAll: { subscribeGigsList: req.params.id },
+            $pull: { subscribeGigsList: req.params.id },
           });
         }
 
-        console.log(req.body.list + "done");
+        console.log(req.body.list + "done delete");
       }
       return res.json(
-        decoded.email + " added to " + req.params.id + " " + req.body.list
+        decoded.email + " remove " + req.params.id + " " + req.body.list
       );
     }
   } catch (error) {
     console.error(error.message);
     res
       .status(400)
-      .json({ Status: "error", msg: "error putting user into gig" });
+      .json({ Status: "error", msg: "error deleting user into gig" });
   }
 };
 
