@@ -1,6 +1,6 @@
 import React from "react";
 
-const GigListingEntry = () => {
+const GigListingEntry = (props) => {
   return (
     <div className="entry d-flex">
       <div>
@@ -11,6 +11,7 @@ const GigListingEntry = () => {
           <strong>GigTitle</strong>
         </div>
         <div>Time | Date</div>
+        {/*use .toLocaleString('en-SG', { timeZone: 'Asia/Singapore' });  */}
         <div className="line-clamp" style={{ Height: "100px" }}>
           I am the description that can be very long so this is delibrately
           making it long so I can see if it breaks I am the description that can
