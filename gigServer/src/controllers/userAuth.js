@@ -81,7 +81,7 @@ const patchUser = async (req, res) => {
     if (decoded.id != req.params.id) {
       return res
         .status(400)
-        .json({ status: "error", msg: "error finding profile to patching" });
+        .json({ status: "error", msg: "error finding profile to patch" });
     } else {
       // Create what data to update.
       const updateProfile = {};
