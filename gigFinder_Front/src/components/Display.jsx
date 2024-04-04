@@ -45,7 +45,11 @@ const Display = () => {
             setShowUserProf={setShowUserProf}
           ></UserProfileModal>
         )}
-        <div className="topbar d-flex justify-content-between align-items-center g-0 m-0">
+        <div
+          className={`topbar d-flex justify-content-between align-items-center g-0 m-0 ${
+            role === "provider" ? "providerbg" : ""
+          }`}
+        >
           <p className="display-6">gigFinder</p>
           {accessToken && (
             <div>

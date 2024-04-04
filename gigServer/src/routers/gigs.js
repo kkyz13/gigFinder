@@ -1,5 +1,10 @@
 const express = require("express");
 const {
+  getAllUsersOfGig,
+  putUserInGig,
+  deleteUserInGig,
+} = require("../controllers/gigsUserMod");
+const {
   addGigForProvider,
   getAllGigs,
   getGigById,
@@ -9,6 +14,8 @@ const {
 const {
   validateAddGigData,
   validateUpdateGigData,
+  validateIdInParams,
+  validateProviderIdInParams,
 } = require("../validators/gigs");
 const { errorCheck } = require("../validators/errorCheck");
 const { validateIdInParams } = require("../validators/gigs");
@@ -25,6 +32,7 @@ router.put(
   errorCheck,
   addGigForProvider
 );
+
 router.delete(
   "/gigs/:id",
   authUserProvider,
@@ -32,6 +40,7 @@ router.delete(
   errorCheck,
   deleteGigForProvider
 );
+
 router.patch(
   "/gigs/:id",
   authUserProvider,
@@ -39,5 +48,9 @@ router.patch(
   errorCheck,
   updateGigForProvider
 );
+
+router.get("/gigs/usermod/:id", getAllUsersOfGig);
+router.put("/gigs/usermod/:id", putUserInGig);
+router.delete("/gigs/usermod/:id", deleteUserInGig);
 
 module.exports = router;
