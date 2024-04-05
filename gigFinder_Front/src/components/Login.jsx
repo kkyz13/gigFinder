@@ -57,6 +57,7 @@ const Login = (props) => {
   };
 
   const handleRegistration = async () => {
+    //in built role detect from the dropdown box
     if (role === "user") {
       const res = await fetchData("/auth/u/register", "PUT", {
         email: emailRef.current.value,
