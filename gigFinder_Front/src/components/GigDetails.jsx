@@ -20,10 +20,11 @@ const GigDisplay = (props) => {
   //--------------------on mount------------------------//
   const [data, setData] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(false);
 
   const loadGigDetails = async (id) => {
+    setFirstLoad(true);
     setIsLoaded(false);
-    console.log("attempting to load 1 gig");
     try {
       if (props.entryId.length > 1) {
         const res = await fetchData(
@@ -34,12 +35,10 @@ const GigDisplay = (props) => {
         );
         if (res.ok) {
           const data = await res.data;
-          console.log(data);
           setData(data);
         }
       }
     } catch (error) {
-      console.log("failed to load 1 gig");
       console.log(error);
     }
   };
@@ -149,8 +148,6 @@ const GigDisplay = (props) => {
       titleRef.current.value = data.title;
       // authorRef.current.value = data.author.name;
       const d = new Date(data.dateTimeStart);
-      console.log(d);
-      console.log(d.toISOString());
       dateRef.current.value = d.toISOString().slice(0, 10);
       timeRef.current.value = d.toLocaleTimeString([], {
         hour12: false,
@@ -184,10 +181,19 @@ const GigDisplay = (props) => {
       }
     }
   }, [isLoaded]);
-
+  //---------------------------------RENDER BLOCK--------------------------------------------------//
   return (
     <div className="col-6 gigdisplay">
-      {data && (
+      {firstLoad ? (
+        isLoaded ? (
+          ""
+        ) : (
+          <div className="centered display-6">Loading...</div>
+        )
+      ) : (
+        <div className="centered display-6">{`No gig selected. :(`}</div>
+      )}
+      {isLoaded ? (
         <div className="detail container row mt-1">
           <div className="col-4">
             <img
@@ -195,7 +201,7 @@ const GigDisplay = (props) => {
               src={`${data.pic}`}
             ></img>
           </div>
-          <div className="col-6">
+          <div className="col-8">
             <input
               readOnly={userCtx.role === "user" ? true : false}
               ref={titleRef}
@@ -235,7 +241,7 @@ const GigDisplay = (props) => {
             <input
               readOnly={userCtx.role === "user" ? true : false}
               ref={linkRef}
-              className="w-50"
+              className="w-75"
               type="text"
               placeholder="no link provided"
             ></input>
@@ -253,10 +259,8 @@ const GigDisplay = (props) => {
               <p>
                 Contact: <u>{data.author.phoneNumber}</u>
               </p>
-              <p>
-                Bio:{" "}
-                <div className="d-inline-flex">{data.author.biography}</div>
-              </p>
+              <p>Bio:</p>{" "}
+              <div className="d-inline-flex">{data.author.biography}</div>
             </div>
           </div>
           <div className="d-flex interest container">
@@ -304,6 +308,8 @@ const GigDisplay = (props) => {
             )}
           </div>
         </div>
+      ) : (
+        <></>
       )}
     </div>
   );

@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 import GigDetails from "./GigDetails";
 import Login from "./Login";
 import GigListingEntry from "./GigListingEntry";
+import GigCanvas from "./GigCanvas";
 
 const Display = () => {
   const [showUserProf, setShowUserProf] = useState(false);
@@ -36,6 +37,8 @@ const Display = () => {
     setUserEmail("");
     setShowLogin(true);
   };
+
+  const newGigInit = () => {};
   return (
     <>
       <UserContext.Provider
@@ -82,11 +85,21 @@ const Display = () => {
         </div>
         <div className="row z-n1">
           <div className="col-6 g-0 giglist">
-            {role === "provider" && <button className="newgigbtn">+</button>}
-            {gigsArr.length !== 0 &&
+            {role === "provider" && (
+              <button
+                onClick={() => {
+                  newGigInit();
+                }}
+                className="newgigbtn"
+              >
+                +
+              </button>
+            )}
+            {gigsArr.length !== 0 && role === "user" ? (
               gigsArr.map((entry, id) => {
                 return (
                   <GigListingEntry
+                    key={entry.id}
                     id={entry._id}
                     title={entry.title}
                     author={entry.author.name}
@@ -97,10 +110,18 @@ const Display = () => {
                     setGigSelect={setGigSelect}
                   ></GigListingEntry>
                 );
-              })}
+              })
+            ) : (
+              <div className="container">Sort Provider Gigs here</div>
+            )}
           </div>
           {showLogin && <Login setShowLogin={setShowLogin}></Login>}
-          {!showLogin && <GigDetails entryId={gigSelect}></GigDetails>}
+          {!showLogin && role === "user" && (
+            <GigDetails entryId={gigSelect}></GigDetails>
+          )}
+          {!showLogin && role === "provider" && (
+            <GigCanvas entryId={gigSelect}></GigCanvas>
+          )}
         </div>
       </UserContext.Provider>
     </>

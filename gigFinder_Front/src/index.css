@@ -67,6 +67,13 @@ body {
   height: 95vh;
   z-index: 2;
 }
+
+.gigcanvas {
+  background-color: rgb(193, 166, 136);
+  height: 95vh;
+  z-index: 2;
+}
+
 .entry {
   z-index: 3;
   background-color: rgb(255, 255, 255);
@@ -121,6 +128,9 @@ body {
   width: 100%;
   padding: 4px;
   border: solid grey;
+}
+.authorbio p {
+  margin: 0.5rem;
 }
 .interest {
   margin: 0.3rem 0.45rem;
