@@ -3,18 +3,6 @@ import UserContext from "../context/user";
 import useFetch from "../hooks/useFetch";
 
 const GigDisplay = (props) => {
-<<<<<<< Updated upstream
-  const fetchData = useFetch();
-  const userCtx = useContext(UserContext);
-  const loadGigDetails = () => {
-    if (props.entryId) {
-      // const res = await FetchData()
-    }
-  };
-=======
-<<<<<<< Updated upstream
-  const userCtx = useContext(UserContext);
-=======
   const [debug, showDebug] = useState(false);
   const fetchData = useFetch();
   const userCtx = useContext(UserContext);
@@ -87,8 +75,7 @@ const GigDisplay = (props) => {
       descriptionRef.current.value = data.description;
     }
   }, [isLoaded]);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
   return (
     <div className="col-6 gigdisplay">
       <button
