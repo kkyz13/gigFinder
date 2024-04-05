@@ -25,6 +25,7 @@ const Login = (props) => {
 
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
+      userCtx.setRefreshToken(res.data.refresh);
       const decoded = jwtDecode(res.data.access);
       console.log(decoded);
       userCtx.setRole(decoded.role);

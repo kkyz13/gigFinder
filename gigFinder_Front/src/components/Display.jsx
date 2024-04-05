@@ -9,6 +9,7 @@ import GigListingEntry from "./GigListingEntry";
 const Display = () => {
   const [showUserProf, setShowUserProf] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
   const [role, setRole] = useState("");
   const [userId, setUserId] = useState("");
   const [showLogin, setShowLogin] = useState(true);
@@ -41,6 +42,8 @@ const Display = () => {
         value={{
           accessToken,
           setAccessToken,
+          refreshToken,
+          setRefreshToken,
           role,
           setRole,
           userId,
