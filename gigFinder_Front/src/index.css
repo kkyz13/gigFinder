@@ -90,6 +90,17 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.detail img {
+  height: 200px;
+  width: 200px;
+}
+
+.detail textarea,
+.detail input {
+  border: none;
+  margin: 2px;
+}
 .login {
   transition-duration: 0.5;
   transition-timing-function: ease-out;
