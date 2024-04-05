@@ -3,20 +3,21 @@ import UserContext from "../context/user";
 import useFetch from "../hooks/useFetch";
 
 const GigDisplay = (props) => {
-  const [debug, showDebug] = useState(false);
+  //------------required----------------//
   const fetchData = useFetch();
   const userCtx = useContext(UserContext);
-
+  //-------------------display variables-----------------//
   const [noLink, setNoLink] = useState(false);
+  const [isInterested, setIsInterested] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const titleRef = useRef();
-  const authorRef = useRef();
   const dateRef = useRef();
+  const timeRef = useRef();
   const addressRef = useRef();
   const linkRef = useRef();
   const descriptionRef = useRef();
-  const [interestUserArr, setInterestUserArr] = useState([]);
-  const [subscribeUserArr, setSubscribeUserArr] = useState([]);
 
+  //--------------------on mount------------------------//
   const [data, setData] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -43,6 +44,97 @@ const GigDisplay = (props) => {
     }
   };
 
+  const putInterest = async () => {
+    try {
+      const res = await fetchData(
+        "/api/gigs/usermod/" + props.entryId,
+        "PUT",
+        {
+          refresh: userCtx.refreshToken,
+          id: userCtx.userId,
+          list: "interestUserList",
+        },
+        userCtx.refreshToken
+      );
+      if (res.ok) {
+        loadGigDetails(props.entryId);
+        console.log("successful PUT");
+        setIsInterested(true);
+      }
+    } catch (error) {
+      console.log("failed to register interest");
+      console.log(error);
+    }
+  };
+
+  const delInterest = async () => {
+    try {
+      const res = await fetchData(
+        "/api/gigs/usermod/" + props.entryId,
+        "DELETE",
+        {
+          refresh: userCtx.refreshToken,
+          id: userCtx.userId,
+          list: "interestUserList",
+        },
+        userCtx.refreshToken
+      );
+      if (res.ok) {
+        loadGigDetails(props.entryId);
+        console.log("successful DELETE");
+        setIsInterested(false);
+      }
+    } catch (error) {
+      console.log("failed to remove interest");
+      console.log(error);
+    }
+  };
+
+  const putSubscribe = async () => {
+    try {
+      const res = await fetchData(
+        "/api/gigs/usermod/" + props.entryId,
+        "PUT",
+        {
+          refresh: userCtx.refreshToken,
+          id: userCtx.userId,
+          list: "subscribeUserList",
+        },
+        userCtx.refreshToken
+      );
+      if (res.ok) {
+        loadGigDetails(props.entryId);
+        console.log("successful PUT");
+        setIsSubscribed(true);
+      }
+    } catch (error) {
+      console.log("failed to subscribe");
+      console.log(error);
+    }
+  };
+
+  const delSubscribe = async () => {
+    try {
+      const res = await fetchData(
+        "/api/gigs/usermod/" + props.entryId,
+        "DELETE",
+        {
+          refresh: userCtx.refreshToken,
+          id: userCtx.userId,
+          list: "subscribeUserList",
+        },
+        userCtx.refreshToken
+      );
+      if (res.ok) {
+        loadGigDetails(props.entryId);
+        console.log("successful DEL");
+        setIsSubscribed(false);
+      }
+    } catch (error) {
+      console.log("failed to unsubscribe");
+      console.log(error);
+    }
+  };
   //useEffect here ensures loadGigDetails only fires off when props.entryId has a change
   useEffect(() => {
     if (props.entryId) {
@@ -60,6 +152,11 @@ const GigDisplay = (props) => {
       console.log(d);
       console.log(d.toISOString());
       dateRef.current.value = d.toISOString().slice(0, 10);
+      timeRef.current.value = d.toLocaleTimeString([], {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       if (data.address !== "") {
         addressRef.current.value = data.address;
       } else {
@@ -73,62 +170,138 @@ const GigDisplay = (props) => {
         setNoLink(true);
       }
       descriptionRef.current.value = data.description;
+
+      //check if user is already inside the interest/subscribe list
+      if (data.interestUserList.includes(userCtx.userId)) {
+        setIsInterested(true);
+      } else {
+        setIsInterested(false);
+      }
+      if (data.subscribeUserList.includes(userCtx.userId)) {
+        setIsSubscribed(true);
+      } else {
+        setIsSubscribed(false);
+      }
     }
   }, [isLoaded]);
 
   return (
     <div className="col-6 gigdisplay">
-      <button
-        onClick={() => {
-          showDebug(true);
-        }}
-      >
-        debug
-      </button>
-      {debug && (
-        <>
-          <div>accesstoken: {userCtx.accessToken}</div>
-          <div>role: {userCtx.role}</div>
-          <div>userId: {userCtx.userId}</div>
-          <div>EntryId: {props.entryId}</div>
-        </>
-      )}
-      {/* Actual display portion start here: */}
       {data && (
-        <div className="detail container">
-          <div>
+        <div className="detail container row mt-1">
+          <div className="col-4">
             <img
               className="img-thumbnail rounded float-start"
               src={`${data.pic}`}
             ></img>
           </div>
-          <div className="">
+          <div className="col-6">
             <input
+              readOnly={userCtx.role === "user" ? true : false}
               ref={titleRef}
-              className="w-50"
+              className="w-100"
               type="text"
+              style={{ fontWeight: "bold" }}
               placeholder="title"
             ></input>
             <textarea
+              readOnly={userCtx.role === "user" ? true : false}
               ref={descriptionRef}
-              className="w-50"
-              rows={5}
+              className="w-100"
+              rows={6}
               placeholder="description"
             ></textarea>
-            <input ref={dateRef} className="w-50" type="date"></input>
+            <div>
+              <input
+                readOnly={userCtx.role === "user" ? true : false}
+                ref={dateRef}
+                className="g-0"
+                type="date"
+              ></input>
+              <input
+                readOnly={userCtx.role === "user" ? true : false}
+                ref={timeRef}
+                className="g-0"
+                type="time"
+              ></input>
+            </div>
             <input
+              readOnly={userCtx.role === "user" ? true : false}
               ref={addressRef}
-              className="w-50"
+              className="w-100"
               type="text"
               placeholder="no location provided"
             ></input>
             <input
+              readOnly={userCtx.role === "user" ? true : false}
               ref={linkRef}
-              className="w-75"
+              className="w-50"
               type="text"
               placeholder="no link provided"
             ></input>
-            <button disabled={noLink}>open link</button>
+            <button disabled={noLink} className="">
+              open link
+            </button>
+          </div>
+          <div className="authorbio">
+            About the organizer:
+            <div className="container">
+              <p>
+                Name: <strong>{data.author.name}</strong>
+              </p>
+              <p>email: {data.author.email}</p>
+              <p>
+                Contact: <u>{data.author.phoneNumber}</u>
+              </p>
+              <p>
+                Bio:{" "}
+                <div className="d-inline-flex">{data.author.biography}</div>
+              </p>
+            </div>
+          </div>
+          <div className="d-flex interest container">
+            {data.interestUserList.length} number of people are interested!
+            {isInterested ? (
+              <button
+                className="interestbtn"
+                onClick={() => {
+                  delInterest();
+                }}
+              >
+                Remove interest
+              </button>
+            ) : (
+              <button
+                className="interestbtn"
+                onClick={() => {
+                  putInterest();
+                }}
+              >
+                I'm Interested!
+              </button>
+            )}
+          </div>
+          <div className="d-flex subscribe container">
+            {data.subscribeUserList.length} number of people are going!
+            {isSubscribed ? (
+              <button
+                className="subscribebtn"
+                onClick={() => {
+                  delSubscribe();
+                }}
+              >
+                I don't wanna go
+              </button>
+            ) : (
+              <button
+                className="subscribebtn"
+                onClick={() => {
+                  putSubscribe();
+                }}
+              >
+                I'm going!
+              </button>
+            )}
           </div>
         </div>
       )}

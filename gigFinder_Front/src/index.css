@@ -92,14 +92,72 @@ body {
 }
 
 .detail img {
-  height: 200px;
-  width: 200px;
+  height: 270px;
+  width: 270px;
+  object-fit: cover;
 }
 
 .detail textarea,
 .detail input {
   border: none;
   margin: 2px;
+}
+
+.linkbtn {
+  margin: 2px 5px;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  background-color: rgb(48, 94, 151);
+  border-radius: 15px;
+  font-weight: 600;
+}
+.authorbio {
+  margin: 1rem 0.45rem 0.3rem;
+  text-align: start;
+  justify-content: start;
+  align-items: start;
+  background-color: aliceblue;
+  width: 100%;
+  padding: 4px;
+  border: solid grey;
+}
+.interest {
+  margin: 0.3rem 0.45rem;
+  text-align: center;
+  justify-content: space-between;
+  align-items: end;
+  background-color: rgb(254, 251, 222);
+  width: 100%;
+  padding: 4px;
+  border: solid grey;
+}
+
+.interestbtn {
+  border: none;
+  padding: 5px 20px;
+  background-color: rgb(241, 243, 131);
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.subscribe {
+  margin: 0.3rem 0.45rem;
+  justify-content: space-between;
+  align-items: end;
+  text-align: center;
+  background-color: rgb(221, 255, 211);
+  width: 100%;
+  padding: 4px;
+  border: solid grey;
+}
+
+.subscribebtn {
+  border: none;
+  padding: 5px 20px;
+  background-color: rgb(131, 243, 148);
+  border-radius: 15px;
+  font-weight: 600;
 }
 .login {
   transition-duration: 0.5;
