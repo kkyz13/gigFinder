@@ -6,8 +6,21 @@ const {
 const { validateParamId } = require("../validators/profile");
 const { errorCheck } = require("../validators/errorCheck");
 const router = express.Router();
+const { authUserProvider } = require("../middleware/auth");
 
-router.post("/u/:id", validateParamId, errorCheck, getProfileUser);
-router.post("/p/:id", validateParamId, errorCheck, getProfileProvider);
+router.post(
+  "/u/:id",
+  authUserProvider,
+  validateParamId,
+  errorCheck,
+  getProfileUser
+);
+router.post(
+  "/p/:id",
+  authUserProvider,
+  validateParamId,
+  errorCheck,
+  getProfileProvider
+);
 
 module.exports = router;

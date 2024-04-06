@@ -4,7 +4,9 @@ const ProivderAuthModel = require("../models/ProviderAuth");
 const getProfileUser = async (req, res) => {
   try {
     // Get profile data by id
-    const profileDataSensitive = await UserAuthModel.findById(req.params.id);
+    const profileDataSensitive = await UserAuthModel.findById(
+      req.params.id
+    ).populate("interestGigsList subscribeGigsList");
     // Checks if null
     if (profileDataSensitive == null) {
       res
@@ -35,7 +37,7 @@ const getProfileProvider = async (req, res) => {
     // Get profile data by id
     const profileDataSensitive = await ProivderAuthModel.findById(
       req.params.id
-    );
+    ).populate("hostGigsList");
     // Checks if null
     if (profileDataSensitive == null) {
       res
