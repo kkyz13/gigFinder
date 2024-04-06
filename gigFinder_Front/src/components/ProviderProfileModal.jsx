@@ -7,21 +7,21 @@ import useFetch from "../hooks/useFetch";
 const OverLay = (props) => {
   const userCtx = useContext(UserContext);
   const fetchData = useFetch();
-  const [userProfile, setUserProfile] = useState({});
-  const [userInterestGigsList, setUserInterestGigsList] = useState([]);
-  const [userSubscribeGigsList, setUserSubscribeGigsList] = useState([]);
+  const [providerProfile, setProviderProfile] = useState([]);
+  const [hostGigsList, setHostGigsList] = useState([]);
+
   const [isUpdatePressed, setIsUpdatePressed] = useState(false);
-  const [updateUserProfile, setUpdateUserProfile] = useState({
-    name: userProfile.name,
-    biography: userProfile.biography,
-    phoneNumber: userProfile.phoneNumber,
-    email: userProfile.email,
+  const [updateProviderProfile, setUpdateProviderProfile] = useState({
+    name: providerProfile.name,
+    biography: providerProfile.biography,
+    phoneNumber: providerProfile.phoneNumber,
+    email: providerProfile.email,
   });
   // const [isDeletePressed, setIsDeletePressed] = useState(false);
 
-  const getUserProfileById = async (id) => {
+  const getProviderProfileById = async (id) => {
     const res = await fetchData(
-      "/profile/u/" + id,
+      "/profile/p/" + id,
       "POST",
       undefined,
       userCtx.accessToken
@@ -29,9 +29,8 @@ const OverLay = (props) => {
 
     if (res.ok) {
       console.log(res.data);
-      setUserProfile(res.data);
-      setUserInterestGigsList(res.data.interestGigsList);
-      setUserSubscribeGigsList(res.data.subscribeGigsList);
+      setProviderProfile(res.data);
+      setHostGigsList(res.data.hostGigsList);
     } else {
       alert(JSON.stringify(res.data));
       console.log(res.data);
@@ -39,17 +38,17 @@ const OverLay = (props) => {
   };
 
   useEffect(() => {
-    getUserProfileById(userCtx.userId);
+    getProviderProfileById(userCtx.userId);
   }, []);
 
   useEffect(() => {
-    setUpdateUserProfile({
-      name: userProfile.name,
-      biography: userProfile.biography,
-      phoneNumber: userProfile.phoneNumber,
-      email: userProfile.email,
+    setUpdateProviderProfile({
+      name: providerProfile.name,
+      biography: providerProfile.biography,
+      phoneNumber: providerProfile.phoneNumber,
+      email: providerProfile.email,
     });
-  }, [userProfile]);
+  }, [providerProfile]);
 
   // useEffect(() => {
   //   if (isDeletePressed) {
@@ -58,26 +57,26 @@ const OverLay = (props) => {
   // }, [isDeletePressed]);
 
   const handleChange = (event) => {
-    setUpdateUserProfile((prevState) => {
+    setUpdateProviderProfile((prevState) => {
       return { ...prevState, [event.target.id]: event.target.value };
     });
   };
 
-  const callUpdateUserProfile = async (id) => {
+  const callUpdateProviderProfile = async (id) => {
     try {
       let body = {
         refresh: userCtx.refreshToken,
-        name: updateUserProfile.name.trim(),
-        email: updateUserProfile.email.trim(),
+        name: updateProviderProfile.name.trim(),
+        email: updateProviderProfile.email.trim(),
       };
 
-      if (updateUserProfile.biography)
-        body.biography = updateUserProfile.biography;
-      if (updateUserProfile.phoneNumber)
-        body.phoneNumber = updateUserProfile.phoneNumber;
+      if (updateProviderProfile.biography)
+        body.biography = updateProviderProfile.biography;
+      if (updateProviderProfile.phoneNumber)
+        body.phoneNumber = updateProviderProfile.phoneNumber;
 
       const res = await fetchData(
-        "/auth/u/" + id,
+        "/auth/p/" + id,
         "PATCH",
         body,
         userCtx.accessToken
@@ -85,7 +84,7 @@ const OverLay = (props) => {
 
       if (res.ok) {
         console.log(res.data);
-        getUserProfileById(userCtx.userId);
+        getProviderProfileById(userCtx.userId);
         setIsUpdatePressed(false);
       }
     } catch (error) {
@@ -114,13 +113,13 @@ const OverLay = (props) => {
   return (
     <div className={styles.backdrop}>
       {isUpdatePressed ? (
-        /* ======================================== update user profile ======================================== */
+        /* ======================================== update provider profile ======================================== */
         <div className={`${styles.board} ${styles.modal}`}>
           <header className={styles.header}>
             <h3>Edit Profile</h3>
           </header>
           <div className={styles.content}>
-            {userProfile.profilePic ? (
+            {providerProfile.profilePic ? (
               <img className={styles.profilePic} src={userProfile.profilePic} />
             ) : (
               <img
@@ -132,28 +131,28 @@ const OverLay = (props) => {
             <input
               id="name"
               type="text"
-              value={updateUserProfile.name}
+              value={updateProviderProfile.name}
               onChange={handleChange}
             ></input>
             <label>biography:</label>
             <input
               id="biography"
               type="text"
-              value={updateUserProfile.biography}
+              value={updateProviderProfile.biography}
               onChange={handleChange}
             ></input>
             <label>phoneNumber:</label>
             <input
               id="phoneNumber"
               type="text"
-              value={updateUserProfile.phoneNumber}
+              value={updateProviderProfile.phoneNumber}
               onChange={handleChange}
             ></input>
             <label>email:</label>
             <input
               id="email"
               type="text"
-              value={updateUserProfile.email}
+              value={updateProviderProfile.email}
               onChange={handleChange}
             ></input>
             {/* <p>interested: </p>
@@ -170,18 +169,12 @@ const OverLay = (props) => {
             )} */}
           </div>
           <div className={styles.actions}>
-            <button onClick={() => callUpdateUserProfile(userCtx.userId)}>
+            <button onClick={() => callUpdateProviderProfile(userCtx.userId)}>
               Save
             </button>
             <button
               onClick={() => {
                 setIsUpdatePressed(false);
-                setUpdateUserProfile({
-                  name: userProfile.name,
-                  biography: userProfile.biography,
-                  phoneNumber: userProfile.phoneNumber,
-                  email: userProfile.email,
-                });
               }}
             >
               Cancel Update
@@ -203,13 +196,13 @@ const OverLay = (props) => {
           </div>
         </div>
       ) : (
-        /* ======================================== view user profile ======================================== */
+        /* ======================================== view provider profile ======================================== */
         <div className={`${styles.board} ${styles.modal}`}>
           <header className={styles.header}>
             <h3>My Profile</h3>
           </header>
           <div className={styles.content}>
-            {userProfile.profilePic ? (
+            {providerProfile.profilePic ? (
               <img className={styles.profilePic} src={userProfile.profilePic} />
             ) : (
               <img
@@ -217,19 +210,13 @@ const OverLay = (props) => {
                 src="../../img/avatars/avatar_0002_blue.jpg"
               />
             )}
-            <p>name: {userProfile.name}</p>
-            <p>biography: {userProfile.biography}</p>
-            <p>phone number: {userProfile.phoneNumber}</p>
-            <p>email: {userProfile.email}</p>
-            <p>interested: </p>
-            {userInterestGigsList.length > 0 ? (
-              userInterestGigsList.map((item) => <p>{item.title}</p>)
-            ) : (
-              <p>none</p>
-            )}
-            <p>subscribed: </p>
-            {userSubscribeGigsList.length > 0 ? (
-              userSubscribeGigsList.map((item) => <p>{item.title}</p>)
+            <p>name: {providerProfile.name}</p>
+            <p>biography: {providerProfile.biography}</p>
+            <p>phone number: {providerProfile.phoneNumber}</p>
+            <p>email: {providerProfile.email}</p>
+            <p>hosted gigs: </p>
+            {hostGigsList.length > 0 ? (
+              hostGigsList.map((item) => <p>{item.title}</p>)
             ) : (
               <p>none</p>
             )}
@@ -296,16 +283,84 @@ const OverLay = (props) => {
   );
 };
 
-const UserProfileModal = (props) => {
+// const OverLay1 = (props) => {
+//   const userCtx = useContext(UserContext);
+//   const fetchData = useFetch();
+//   const [providerProfile, setProviderProfile] = useState([]);
+
+//   const getProviderProfileById = async (id) => {
+//     const res = await fetchData(
+//       "/profile/p/" + id,
+//       "POST",
+//       undefined,
+//       userCtx.accessToken
+//     );
+
+//     if (res.ok) {
+//       console.log(res.data);
+//       setProviderProfile(res.data);
+//     } else {
+//       alert(JSON.stringify(res.data));
+//       console.log(res.data);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getProviderProfileById(userCtx.userId);
+//   }, []);
+
+//   return (
+//     <div
+//       className={styles.backdrop}
+//       onClick={() => {
+//         props.setShowUserProf(false);
+//       }}
+//     >
+//       <div className={`${styles.board} ${styles.modal}`}>
+//         <header className={styles.header}>
+//           <h3>Edit Profile</h3>
+//         </header>
+//         <div className={styles.content}>
+//           <p>name: {providerProfile.name}</p>
+//           <p>biography: {providerProfile.biography}</p>
+//           <p>phone number: {providerProfile.phoneNumber}</p>
+//           <p>email: {providerProfile.email}</p>
+//           {providerProfile.profilePic ? (
+//             <img
+//               className={styles.profilePic}
+//               src={providerProfile.profilePic}
+//             />
+//           ) : (
+//             <img
+//               className={styles.profilePic}
+//               src="../../img/avatars/avatar_0000_red.jpg"
+//             />
+//           )}
+//         </div>
+//         <div className={styles.actions}>
+//           <button
+//             onClick={() => {
+//               props.handleLogOut(true);
+//             }}
+//           >
+//             Log Out
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+const ProviderProfileModal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
         <OverLay
-          // id={props.id}
-          // name={props.name}
-          // bio={props.bio}
-          // phoneNumber={props.phoneNumber}
-          // email={props.email}
+          //   id={props.id}
+          //   name={props.name}
+          //   bio={props.bio}
+          //   phoneNumber={props.phoneNumber}
+          //   email={props.email}
           setShowUserProf={props.setShowUserProf}
           handleLogOut={props.handleLogOut}
         />,
@@ -315,4 +370,4 @@ const UserProfileModal = (props) => {
   );
 };
 
-export default UserProfileModal;
+export default ProviderProfileModal;

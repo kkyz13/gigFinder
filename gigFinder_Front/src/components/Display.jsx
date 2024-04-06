@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 import GigDetails from "./GigDetails";
 import Login from "./Login";
 import GigListingEntry from "./GigListingEntry";
+import ProviderProfileModal from "./ProviderProfileModal";
 import GigCanvas from "./GigCanvas";
 
 const Display = () => {
@@ -76,7 +77,7 @@ const Display = () => {
           setUserEmail,
         }}
       >
-        {showUserProf && (
+        {/* {showUserProf && (
           <UserProfileModal
             // id={props.id}
             // name={props.name}
@@ -86,6 +87,30 @@ const Display = () => {
             handleLogOut={handleLogOut}
             setShowUserProf={setShowUserProf}
           ></UserProfileModal>
+        )} */}
+
+        {showUserProf && role === "user" && (
+          <UserProfileModal
+            // id={props.id}
+            // name={props.name}
+            // bio={props.bio}
+            // phoneNumber={props.phoneNumber}
+            // email={props.email}
+            handleLogOut={handleLogOut}
+            setShowUserProf={setShowUserProf}
+          ></UserProfileModal>
+        )}
+
+        {showUserProf && role === "provider" && (
+          <ProviderProfileModal
+            // id={props.id}
+            // name={props.name}
+            // bio={props.bio}
+            // phoneNumber={props.phoneNumber}
+            // email={props.email}
+            handleLogOut={handleLogOut}
+            setShowUserProf={setShowUserProf}
+          ></ProviderProfileModal>
         )}
         <div
           className={`topbar d-flex justify-content-between align-items-center g-0 m-0 ${
@@ -113,7 +138,7 @@ const Display = () => {
                     key={entry.id}
                     id={entry._id}
                     title={entry.title}
-                    author={entry.author.name}
+                    // author={entry.author.name}
                     pic={entry.pic}
                     address={entry.address}
                     description={entry.description}
