@@ -6,6 +6,7 @@ import GigDetails from "./GigDetails";
 import Login from "./Login";
 import GigListingEntry from "./GigListingEntry";
 import ProviderProfileModal from "./ProviderProfileModal";
+import GigCanvas from "./GigCanvas";
 
 const Display = () => {
   const [showUserProf, setShowUserProf] = useState(false);
@@ -18,6 +19,7 @@ const Display = () => {
   const [gigSelect, setGigSelect] = useState("");
   const [gigsArr, setGigsArr] = useState([]);
   const fetchData = useFetch();
+
   const allGigsGet = async () => {
     const res = await fetchData("/api/gigs", undefined, undefined, undefined);
     if (res.ok) {
@@ -26,11 +28,31 @@ const Display = () => {
       console.log(res);
     }
   };
-  console.log(gigSelect);
+
+  const getProviderGigs = async () => {
+    const res = await fetchData(
+      "/profile/p/" + userId,
+      "POST",
+      undefined,
+      accessToken
+    );
+    if (res.ok) {
+      console.log(res.data);
+      setGigsArr(res.data.hostGigsList);
+    }
+  };
 
   useEffect(() => {
     allGigsGet();
   }, []);
+
+  useEffect(() => {
+    if (role === "provider") {
+      getProviderGigs();
+    } else {
+      allGigsGet();
+    }
+  }, [showLogin]);
   const handleLogOut = () => {
     setAccessToken("");
     setRole("");
@@ -38,6 +60,7 @@ const Display = () => {
     setUserEmail("");
     setShowLogin(true);
   };
+
   return (
     <>
       <UserContext.Provider
@@ -108,11 +131,11 @@ const Display = () => {
         </div>
         <div className="row z-n1">
           <div className="col-6 g-0 giglist">
-            {role === "provider" && <button className="newgigbtn">+</button>}
-            {gigsArr.length !== 0 &&
+            {gigsArr.length !== 0 ? (
               gigsArr.map((entry, id) => {
                 return (
                   <GigListingEntry
+                    key={entry.id}
                     id={entry._id}
                     title={entry.title}
                     // author={entry.author.name}
@@ -123,10 +146,22 @@ const Display = () => {
                     setGigSelect={setGigSelect}
                   ></GigListingEntry>
                 );
-              })}
+              })
+            ) : (
+              <div className="container">Sort Provider Gigs here</div>
+            )}
           </div>
           {showLogin && <Login setShowLogin={setShowLogin}></Login>}
-          {!showLogin && <GigDetails entryId={gigSelect}></GigDetails>}
+          {!showLogin && role === "user" && (
+            <GigDetails entryId={gigSelect}></GigDetails>
+          )}
+          {!showLogin && role === "provider" && (
+            <GigCanvas
+              entryId={gigSelect}
+              getProviderGigs={getProviderGigs}
+              setGigArr={setGigsArr}
+            ></GigCanvas>
+          )}
         </div>
       </UserContext.Provider>
     </>
