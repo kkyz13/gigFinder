@@ -25,6 +25,7 @@ const Login = (props) => {
 
     if (res.ok) {
       userCtx.setAccessToken(res.data.access);
+      userCtx.setRefreshToken(res.data.refresh);
       const decoded = jwtDecode(res.data.access);
       console.log(decoded);
       userCtx.setRole(decoded.role);
@@ -57,6 +58,7 @@ const Login = (props) => {
   };
 
   const handleRegistration = async () => {
+    //in built role detect from the dropdown box
     if (role === "user") {
       const res = await fetchData("/auth/u/register", "PUT", {
         email: emailRef.current.value,
