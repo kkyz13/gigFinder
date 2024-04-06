@@ -7,27 +7,16 @@ import useFetch from "../hooks/useFetch";
 const OverLay = (props) => {
   const userCtx = useContext(UserContext);
   const fetchData = useFetch();
-  const [userProfile, setUserProfile] = useState([]);
+  const [userProfile, setUserProfile] = useState({});
   const [userInterestGigsList, setUserInterestGigsList] = useState([]);
-  const [userInterestGigTitle, setUserInterestGigTitle] = useState([]);
-
-  const getGigById = async (id) => {
-    const res = await fetchData(
-      "/api/gigs/" + id,
-      "POST",
-      undefined,
-      userCtx.accessToken
-    );
-
-    if (res.ok) {
-      console.log(res.data.title);
-      return res.data.title;
-      // setUserInterestGigTitle((prevState) => [...prevState, res.data.title]);
-    } else {
-      alert(JSON.stringify(res.data));
-      console.log(res.data);
-    }
-  };
+  const [userSubscribeGigsList, setUserSubscribeGigsList] = useState([]);
+  const [isUpdatePressed, setIsUpdatePressed] = useState(false);
+  const [updateUserProfile, setUpdateUserProfile] = useState({
+    name: userProfile.name,
+    biography: userProfile.biography,
+    phoneNumber: userProfile.phoneNumber,
+    email: userProfile.email,
+  });
 
   const getUserProfileById = async (id) => {
     const res = await fetchData(
@@ -41,6 +30,7 @@ const OverLay = (props) => {
       console.log(res.data);
       setUserProfile(res.data);
       setUserInterestGigsList(res.data.interestGigsList);
+      setUserSubscribeGigsList(res.data.subscribeGigsList);
     } else {
       alert(JSON.stringify(res.data));
       console.log(res.data);
@@ -49,80 +39,197 @@ const OverLay = (props) => {
 
   useEffect(() => {
     getUserProfileById(userCtx.userId);
-    // userInterestGigsList.forEach((item) => {
-    //   getGigById(item);
-    // });
-    // setUserInterestGigTitle(titleArray);
-    const fetchTitles = async () => {
-      const fetchedTitles = await Promise.all(
-        userInterestGigsList.map(async (id) => {
-          const title = await getGigById(id);
-          return title;
-        })
-      );
-      setUserInterestGigTitle(fetchedTitles.filter(Boolean)); // Filter out null values
-    };
-    fetchTitles();
   }, []);
 
-  // useEffect(() => {
-  //   userInterestGigsList.forEach((item) => {
-  //     getGigById(item);
-  //   });
-  //   setUserInterestGigTitle(titleArray);
-  // }, [userInterestGigsList]);
+  useEffect(() => {
+    setUpdateUserProfile({
+      name: userProfile.name,
+      biography: userProfile.biography,
+      phoneNumber: userProfile.phoneNumber,
+      email: userProfile.email,
+    });
+  }, [userProfile]);
 
-  // useEffect(() => {
-  //   const fetchDataAndGigs = async () => {
-  //     await getUserProfileById(userCtx.userId);
-  //     userInterestGigsList.forEach((item) => {
-  //       getGigById(item);
-  //     });
-  //   };
+  const handleChange = (event) => {
+    setUpdateUserProfile((prevState) => {
+      return { ...prevState, [event.target.id]: event.target.value };
+    });
+  };
 
-  //   fetchDataAndGigs();
-  // }, []);
+  const callUpdateUserProfile = async (id) => {
+    try {
+      let body = {
+        refresh: userCtx.refreshToken,
+        name: updateUserProfile.name.trim(),
+        email: updateUserProfile.email.trim(),
+      };
+
+      if (updateUserProfile.biography)
+        body.biography = updateUserProfile.biography;
+      if (updateUserProfile.phoneNumber)
+        body.phoneNumber = updateUserProfile.phoneNumber;
+
+      const res = await fetchData(
+        "/auth/u/" + id,
+        "PATCH",
+        body,
+        userCtx.accessToken
+      );
+
+      if (res.ok) {
+        console.log(res.data);
+        getUserProfileById(userCtx.userId);
+        setIsUpdatePressed(false);
+      }
+    } catch (error) {
+      alert(JSON.stringify(res.data));
+      console.log(res.data);
+    }
+  };
 
   return (
-    <div
-      className={styles.backdrop}
-      onClick={() => {
-        props.setShowUserProf(false);
-      }}
-    >
-      <div className={`${styles.board} ${styles.modal}`}>
-        <header className={styles.header}>
-          <h3>Edit Profile</h3>
-        </header>
-        <div className={styles.content}>
-          <p>name: {userProfile.name}</p>
-          <p>biography: {userProfile.biography}</p>
-          <p>phone number: {userProfile.phoneNumber}</p>
-          <p>email: {userProfile.email}</p>
-          <p>interested: </p>
-          {userInterestGigTitle}
-          {/* {userInterestGigTitle.map((item) => (
-            <p>{item}</p>
-          ))} */}
-          {userProfile.profilePic ? (
-            <img className={styles.profilePic} src={userProfile.profilePic} />
-          ) : (
-            <img
-              className={styles.profilePic}
-              src="../../img/avatars/avatar_0002_blue.jpg"
-            />
-          )}
+    <div className={styles.backdrop}>
+      {isUpdatePressed ? (
+        /* ======================================== update user profile ======================================== */
+        <div className={`${styles.board} ${styles.modal}`}>
+          <header className={styles.header}>
+            <h3>Edit Profile</h3>
+          </header>
+          <div className={styles.content}>
+            {userProfile.profilePic ? (
+              <img className={styles.profilePic} src={userProfile.profilePic} />
+            ) : (
+              <img
+                className={styles.profilePic}
+                src="../../img/avatars/avatar_0002_blue.jpg"
+              />
+            )}
+            <label>name:</label>
+            <input
+              id="name"
+              type="text"
+              value={updateUserProfile.name}
+              onChange={handleChange}
+            ></input>
+            <label>biography:</label>
+            <input
+              id="biography"
+              type="text"
+              value={updateUserProfile.biography}
+              onChange={handleChange}
+            ></input>
+            <label>phoneNumber:</label>
+            <input
+              id="phoneNumber"
+              type="text"
+              value={updateUserProfile.phoneNumber}
+              onChange={handleChange}
+            ></input>
+            <label>email:</label>
+            <input
+              id="email"
+              type="text"
+              value={updateUserProfile.email}
+              onChange={handleChange}
+            ></input>
+            {/* <p>interested: </p>
+            {userInterestGigsList.length > 0 ? (
+              userInterestGigsList.map((item) => <p>{item.title}</p>)
+            ) : (
+              <p>none</p>
+            )}
+            <p>subscribed: </p>
+            {userSubscribeGigsList.length > 0 ? (
+              userSubscribeGigsList.map((item) => <p>{item.title}</p>)
+            ) : (
+              <p>none</p>
+            )} */}
+          </div>
+          <div className={styles.actions}>
+            <button onClick={() => callUpdateUserProfile(userCtx.userId)}>
+              Save
+            </button>
+            <button
+              onClick={() => {
+                setIsUpdatePressed(false);
+              }}
+            >
+              Cancel Update
+            </button>
+            <button
+              onClick={() => {
+                props.setShowUserProf(false);
+              }}
+            >
+              Close Window
+            </button>
+            <button
+              onClick={() => {
+                props.handleLogOut(true);
+              }}
+            >
+              Log Out
+            </button>
+          </div>
         </div>
-        <div className={styles.actions}>
-          <button
-            onClick={() => {
-              props.handleLogOut(true);
-            }}
-          >
-            Log Out
-          </button>
+      ) : (
+        /* ======================================== view user profile ======================================== */
+        <div className={`${styles.board} ${styles.modal}`}>
+          <header className={styles.header}>
+            <h3>My Profile</h3>
+          </header>
+          <div className={styles.content}>
+            {userProfile.profilePic ? (
+              <img className={styles.profilePic} src={userProfile.profilePic} />
+            ) : (
+              <img
+                className={styles.profilePic}
+                src="../../img/avatars/avatar_0002_blue.jpg"
+              />
+            )}
+            <p>name: {userProfile.name}</p>
+            <p>biography: {userProfile.biography}</p>
+            <p>phone number: {userProfile.phoneNumber}</p>
+            <p>email: {userProfile.email}</p>
+            <p>interested: </p>
+            {userInterestGigsList.length > 0 ? (
+              userInterestGigsList.map((item) => <p>{item.title}</p>)
+            ) : (
+              <p>none</p>
+            )}
+            <p>subscribed: </p>
+            {userSubscribeGigsList.length > 0 ? (
+              userSubscribeGigsList.map((item) => <p>{item.title}</p>)
+            ) : (
+              <p>none</p>
+            )}
+          </div>
+          <div className={styles.actions}>
+            <button
+              onClick={() => {
+                setIsUpdatePressed(true);
+              }}
+            >
+              Update
+            </button>
+            <button>Delete Profile</button>
+            <button
+              onClick={() => {
+                props.setShowUserProf(false);
+              }}
+            >
+              Close Window
+            </button>
+            <button
+              onClick={() => {
+                props.handleLogOut(true);
+              }}
+            >
+              Log Out
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
