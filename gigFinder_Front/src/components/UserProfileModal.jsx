@@ -17,6 +17,7 @@ const OverLay = (props) => {
     phoneNumber: userProfile.phoneNumber,
     email: userProfile.email,
   });
+  // const [isDeletePressed, setIsDeletePressed] = useState(false);
 
   const getUserProfileById = async (id) => {
     const res = await fetchData(
@@ -49,6 +50,12 @@ const OverLay = (props) => {
       email: userProfile.email,
     });
   }, [userProfile]);
+
+  // useEffect(() => {
+  //   if (isDeletePressed) {
+  //     // setIsDeletePressed(true);
+  //   }
+  // }, [isDeletePressed]);
 
   const handleChange = (event) => {
     setUpdateUserProfile((prevState) => {
@@ -86,6 +93,23 @@ const OverLay = (props) => {
       console.log(res.data);
     }
   };
+
+  // const deleteUserProfile = async (id) => {
+  //   try {
+  //     const res = await fetchData(
+  //       "/auth/u/delete/" + id,
+  //       "DELETE",
+  //       {
+  //         refresh: userCtx.refreshToken,
+  //       },
+  //       userCtx.accessToken
+  //     );
+
+  //     if (res.ok) {
+  //       props.handleLogOut(true);
+  //     }
+  //   } catch (error) {}
+  // };
 
   return (
     <div className={styles.backdrop}>
@@ -152,6 +176,12 @@ const OverLay = (props) => {
             <button
               onClick={() => {
                 setIsUpdatePressed(false);
+                setUpdateUserProfile({
+                  name: userProfile.name,
+                  biography: userProfile.biography,
+                  phoneNumber: userProfile.phoneNumber,
+                  email: userProfile.email,
+                });
               }}
             >
               Cancel Update
@@ -212,7 +242,9 @@ const OverLay = (props) => {
             >
               Update
             </button>
-            <button>Delete Profile</button>
+            {/* <button onClick={() => setIsDeletePressed(true)}>
+              Delete Profile
+            </button> */}
             <button
               onClick={() => {
                 props.setShowUserProf(false);
@@ -230,9 +262,40 @@ const OverLay = (props) => {
           </div>
         </div>
       )}
+
+      {/* {isDeletePressed && (
+        <div className={`${styles.board} ${styles.modal}`}>
+          <header className={styles.header}>
+            <h3>Delete Profile</h3>
+          </header>
+          <div className={styles.content}>
+            <p>We hate to see you go</p>
+          </div>
+          <div className={styles.actions}>
+            <button onClick={() => deleteUserProfile(userCtx.userId)}>
+              Confirm Delete
+            </button>
+            <button
+              onClick={() => {
+                props.setShowUserProf(false);
+              }}
+            >
+              Close Window
+            </button>
+            <button
+              onClick={() => {
+                props.handleLogOut(true);
+              }}
+            >
+              Log Out
+            </button>
+          </div>
+        </div>
+      )} */}
     </div>
   );
 };
+
 const UserProfileModal = (props) => {
   return (
     <>
