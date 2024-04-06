@@ -161,7 +161,7 @@ const Login = (props) => {
                 placeholder="bio"
               ></input>
             </div>
-            <UploadWidget></UploadWidget>
+            {/* <UploadWidget></UploadWidget> */}
             <div style={{ padding: "5px" }}>
               <button
                 onClick={() => handleRegistration()}
