@@ -36,6 +36,7 @@ const GigDisplay = (props) => {
         if (res.ok) {
           const data = await res.data;
           setData(data);
+          setIsLoaded(true);
         }
       }
     } catch (error) {

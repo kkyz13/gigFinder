@@ -54,6 +54,51 @@ body {
   transform: translateY(-5px);
   background-color: #b37478;
 }
+
+.putgigbtn {
+  transition: 0.3s;
+  color: white;
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #cf8383;
+  width: 75%;
+}
+.putgigbtn:hover {
+  transform: translateY(-5px);
+  background-color: #b37478;
+}
+
+.patchgigbtn {
+  transition: 100ms;
+  border: none;
+  padding: 7px;
+  background-color: rgb(253, 253, 106);
+  border-radius: 5px 0 0 5px;
+}
+.patchgigbtn:hover {
+  background-color: rgb(255, 255, 182);
+}
+.patchgigbtn:active {
+  background-color: rgb(215, 215, 45);
+  transform: translateY(4px);
+}
+.delgigbtn {
+  transition: 100ms;
+
+  color: white;
+  border: none;
+  padding: 7px;
+  background-color: rgb(164, 64, 64);
+  border-radius: 0 5px 5px 0;
+}
+.delgigbtn:hover {
+  background-color: rgb(196, 75, 75);
+}
+.delgigbtn:active {
+  background-color: rgb(120, 47, 47);
+  transform: translateY(4px);
+}
 .giglist {
   background-color: rgb(206, 208, 236);
   height: 95vh;
@@ -188,4 +233,12 @@ body {
 .providerlogbg {
   transition: all;
   background-color: #835252;
+}
+
+.putgigbtn {
+  color: white;
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #cf8383;
 }

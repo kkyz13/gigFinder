@@ -18,6 +18,7 @@ const Display = () => {
   const [gigSelect, setGigSelect] = useState("");
   const [gigsArr, setGigsArr] = useState([]);
   const fetchData = useFetch();
+
   const allGigsGet = async () => {
     const res = await fetchData("/api/gigs", undefined, undefined, undefined);
     if (res.ok) {
@@ -26,10 +27,31 @@ const Display = () => {
       console.log(res);
     }
   };
-  console.log(gigSelect);
+
+  const getProviderGigs = async () => {
+    const res = await fetchData(
+      "/profile/p/" + userId,
+      "POST",
+      undefined,
+      accessToken
+    );
+    if (res.ok) {
+      console.log(res.data);
+      setGigsArr(res.data.hostGigsList);
+    }
+  };
+
   useEffect(() => {
     allGigsGet();
   }, []);
+
+  useEffect(() => {
+    if (role === "provider") {
+      getProviderGigs();
+    } else {
+      allGigsGet();
+    }
+  }, [showLogin]);
   const handleLogOut = () => {
     setAccessToken("");
     setRole("");
@@ -38,7 +60,6 @@ const Display = () => {
     setShowLogin(true);
   };
 
-  const newGigInit = () => {};
   return (
     <>
       <UserContext.Provider
@@ -85,17 +106,7 @@ const Display = () => {
         </div>
         <div className="row z-n1">
           <div className="col-6 g-0 giglist">
-            {role === "provider" && (
-              <button
-                onClick={() => {
-                  newGigInit();
-                }}
-                className="newgigbtn"
-              >
-                +
-              </button>
-            )}
-            {gigsArr.length !== 0 && role === "user" ? (
+            {gigsArr.length !== 0 ? (
               gigsArr.map((entry, id) => {
                 return (
                   <GigListingEntry
@@ -120,7 +131,11 @@ const Display = () => {
             <GigDetails entryId={gigSelect}></GigDetails>
           )}
           {!showLogin && role === "provider" && (
-            <GigCanvas entryId={gigSelect}></GigCanvas>
+            <GigCanvas
+              entryId={gigSelect}
+              getProviderGigs={getProviderGigs}
+              setGigArr={setGigsArr}
+            ></GigCanvas>
           )}
         </div>
       </UserContext.Provider>
