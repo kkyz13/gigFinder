@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Login.module.css";
-const UploadWidget = () => {
+const UploadWidget = (props) => {
   const [imgurl, setImgurl] = useState("");
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -11,23 +11,22 @@ const UploadWidget = () => {
       {
         cloudName: "dotft2n3n",
         uploadPreset: "wu6af385",
-        cropping: true,
-        croppingAspectRatio: true,
-        showCompletedButton: true,
+        // cropping: true,
+        // croppingAspectRatio: true,
+        // showCompletedButton: true,
       },
       function (error, result) {
         console.log(result);
         if (result.event === "success") {
-          setImgurl(result.info.url);
+          props.setImgUrl(result.info.url);
+          console.log("img upload successful");
         }
-        console.log(imgurl);
       }
     );
   }, []);
   return (
     <>
       <button
-        disabled
         className={`${styles.loginbutton}`}
         onClick={() => {
           widgetRef.current.open();
@@ -35,8 +34,8 @@ const UploadWidget = () => {
       >
         Upload
       </button>
-      <br></br>
-      <img src={imgurl}></img>
+      {/* <br></br>
+      <img src={imgurl}></img> */}
     </>
   );
 };
