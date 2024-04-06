@@ -46,6 +46,10 @@
   justify-content: flex-end;
 }
 
+.profilePic {
+  width: 120px;
+}
+
 @media (min-width: 600px) {
   .modal {
     left: calc(20%);
