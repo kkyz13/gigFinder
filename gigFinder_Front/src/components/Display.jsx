@@ -61,6 +61,7 @@ const Display = () => {
     setUserId("");
     setUserEmail("");
     setShowUserProf(false);
+    setGigSelect("");
     setShowLogin(true);
   };
 
