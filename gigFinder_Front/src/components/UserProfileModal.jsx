@@ -72,9 +72,9 @@ const OverLay = (props) => {
       };
 
       if (updateUserProfile.biography)
-        body.biography = updateUserProfile.biography;
+        body.biography = updateUserProfile.biography.trim();
       if (updateUserProfile.phoneNumber)
-        body.phoneNumber = updateUserProfile.phoneNumber;
+        body.phoneNumber = updateUserProfile.phoneNumber.trim();
 
       const res = await fetchData(
         "/auth/u/" + id,
@@ -89,8 +89,8 @@ const OverLay = (props) => {
         setIsUpdatePressed(false);
       }
     } catch (error) {
-      alert(JSON.stringify(res.data));
-      console.log(res.data);
+      alert(JSON.stringify(error));
+      console.log(error);
     }
   };
 

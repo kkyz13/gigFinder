@@ -138,7 +138,7 @@ const Display = () => {
                     key={entry.id}
                     id={entry._id}
                     title={entry.title}
-                    // author={entry.author.name}
+                    author={entry.author.name}
                     pic={entry.pic}
                     address={entry.address}
                     description={entry.description}
