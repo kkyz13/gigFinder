@@ -227,7 +227,16 @@ const OverLay = (props) => {
             <p>email: {providerProfile.email}</p>
             <p>hosted gigs: </p>
             {hostGigsList.length > 0 ? (
-              hostGigsList.map((item) => <p>{item.title}</p>)
+              hostGigsList.map((item) => (
+                <button
+                  onClick={() => {
+                    props.setShowUserProf(false);
+                    props.setGigSelect(item._id);
+                  }}
+                >
+                  {item.title}
+                </button>
+              ))
             ) : (
               <p>none</p>
             )}
@@ -306,6 +315,7 @@ const ProviderProfileModal = (props) => {
           //   email={props.email}
           setShowUserProf={props.setShowUserProf}
           handleLogOut={props.handleLogOut}
+          setGigSelect={props.setGigSelect}
         />,
         document.querySelector("#modal-root")
       )}
