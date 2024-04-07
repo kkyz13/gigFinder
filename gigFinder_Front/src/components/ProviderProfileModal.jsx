@@ -71,9 +71,9 @@ const OverLay = (props) => {
       };
 
       if (updateProviderProfile.biography)
-        body.biography = updateProviderProfile.biography;
+        body.biography = updateProviderProfile.biography.trim();
       if (updateProviderProfile.phoneNumber)
-        body.phoneNumber = updateProviderProfile.phoneNumber;
+        body.phoneNumber = updateProviderProfile.phoneNumber.trim();
 
       const res = await fetchData(
         "/auth/p/" + id,
@@ -88,8 +88,8 @@ const OverLay = (props) => {
         setIsUpdatePressed(false);
       }
     } catch (error) {
-      alert(JSON.stringify(res.data));
-      console.log(res.data);
+      alert(JSON.stringify(error));
+      console.log(error);
     }
   };
 
@@ -169,12 +169,23 @@ const OverLay = (props) => {
             )} */}
           </div>
           <div className={styles.actions}>
-            <button onClick={() => callUpdateProviderProfile(userCtx.userId)}>
+            <button
+              onClick={() => {
+                console.log(userCtx.userId);
+                callUpdateProviderProfile(userCtx.userId);
+              }}
+            >
               Save
             </button>
             <button
               onClick={() => {
                 setIsUpdatePressed(false);
+                setUpdateProviderProfile({
+                  name: providerProfile.name,
+                  biography: providerProfile.biography,
+                  phoneNumber: providerProfile.phoneNumber,
+                  email: providerProfile.email,
+                });
               }}
             >
               Cancel Update
@@ -282,74 +293,6 @@ const OverLay = (props) => {
     </div>
   );
 };
-
-// const OverLay1 = (props) => {
-//   const userCtx = useContext(UserContext);
-//   const fetchData = useFetch();
-//   const [providerProfile, setProviderProfile] = useState([]);
-
-//   const getProviderProfileById = async (id) => {
-//     const res = await fetchData(
-//       "/profile/p/" + id,
-//       "POST",
-//       undefined,
-//       userCtx.accessToken
-//     );
-
-//     if (res.ok) {
-//       console.log(res.data);
-//       setProviderProfile(res.data);
-//     } else {
-//       alert(JSON.stringify(res.data));
-//       console.log(res.data);
-//     }
-//   };
-
-//   useEffect(() => {
-//     getProviderProfileById(userCtx.userId);
-//   }, []);
-
-//   return (
-//     <div
-//       className={styles.backdrop}
-//       onClick={() => {
-//         props.setShowUserProf(false);
-//       }}
-//     >
-//       <div className={`${styles.board} ${styles.modal}`}>
-//         <header className={styles.header}>
-//           <h3>Edit Profile</h3>
-//         </header>
-//         <div className={styles.content}>
-//           <p>name: {providerProfile.name}</p>
-//           <p>biography: {providerProfile.biography}</p>
-//           <p>phone number: {providerProfile.phoneNumber}</p>
-//           <p>email: {providerProfile.email}</p>
-//           {providerProfile.profilePic ? (
-//             <img
-//               className={styles.profilePic}
-//               src={providerProfile.profilePic}
-//             />
-//           ) : (
-//             <img
-//               className={styles.profilePic}
-//               src="../../img/avatars/avatar_0000_red.jpg"
-//             />
-//           )}
-//         </div>
-//         <div className={styles.actions}>
-//           <button
-//             onClick={() => {
-//               props.handleLogOut(true);
-//             }}
-//           >
-//             Log Out
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 const ProviderProfileModal = (props) => {
   return (
