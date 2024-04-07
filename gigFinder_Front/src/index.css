@@ -143,6 +143,9 @@ body {
 .selected {
   background-color: bisque;
 }
+.description {
+  font-size: small;
+}
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;

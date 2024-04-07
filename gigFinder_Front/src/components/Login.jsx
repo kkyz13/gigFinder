@@ -95,6 +95,7 @@ const Login = (props) => {
         bioRef.current.value = "";
         phoneRef.current.value = "";
         setShowRegistration(false);
+        setMessage("Registration Successful");
       } else {
         console.log(res.data);
         setMessage(res.data);
