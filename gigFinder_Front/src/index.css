@@ -22,10 +22,12 @@ body {
   padding-top: 2px;
   padding-left: 5px;
   padding-right: 15px;
+  text-align: center;
 }
 
-.topbar p {
+.topbar span {
   font-size: 24pt;
+  padding-bottom: 0.4rem;
 }
 
 .centered {
@@ -133,6 +135,10 @@ body {
 .entry img {
   width: 120px;
   object-fit: contain;
+}
+
+.useris {
+  background-color: rgb(246, 250, 255);
 }
 .selected {
   background-color: bisque;

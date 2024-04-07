@@ -60,6 +60,7 @@ const GigDisplay = (props) => {
         loadGigDetails(props.entryId);
         console.log("successful PUT");
         setIsInterested(true);
+        props.allGigsGet();
       }
     } catch (error) {
       console.log("failed to register interest");
@@ -83,6 +84,7 @@ const GigDisplay = (props) => {
         loadGigDetails(props.entryId);
         console.log("successful DELETE");
         setIsInterested(false);
+        props.allGigsGet();
       }
     } catch (error) {
       console.log("failed to remove interest");
@@ -106,6 +108,7 @@ const GigDisplay = (props) => {
         loadGigDetails(props.entryId);
         console.log("successful PUT");
         setIsSubscribed(true);
+        props.allGigsGet();
       }
     } catch (error) {
       console.log("failed to subscribe");
@@ -129,6 +132,7 @@ const GigDisplay = (props) => {
         loadGigDetails(props.entryId);
         console.log("successful DEL");
         setIsSubscribed(false);
+        props.allGigsGet();
       }
     } catch (error) {
       console.log("failed to unsubscribe");
