@@ -223,13 +223,31 @@ const OverLay = (props) => {
             <p>email: {userProfile.email}</p>
             <p>interested: </p>
             {userInterestGigsList.length > 0 ? (
-              userInterestGigsList.map((item) => <p>{item.title}</p>)
+              userInterestGigsList.map((item) => (
+                <button
+                  onClick={() => {
+                    props.setShowUserProf(false);
+                    props.setGigSelect(item._id);
+                  }}
+                >
+                  {item.title}
+                </button>
+              ))
             ) : (
               <p>none</p>
             )}
             <p>subscribed: </p>
             {userSubscribeGigsList.length > 0 ? (
-              userSubscribeGigsList.map((item) => <p>{item.title}</p>)
+              userSubscribeGigsList.map((item) => (
+                <button
+                  onClick={() => {
+                    props.setShowUserProf(false);
+                    props.setGigSelect(item._id);
+                  }}
+                >
+                  {item.title}
+                </button>
+              ))
             ) : (
               <p>none</p>
             )}
@@ -308,6 +326,7 @@ const UserProfileModal = (props) => {
           // email={props.email}
           setShowUserProf={props.setShowUserProf}
           handleLogOut={props.handleLogOut}
+          setGigSelect={props.setGigSelect}
         />,
         document.querySelector("#modal-root")
       )}
