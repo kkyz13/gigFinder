@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/user";
 
 const GigListingEntry = (props) => {
+  //------------required----------------//
+  const userCtx = useContext(UserContext);
+
   const d = new Date(props.dateTime);
+
+  const isInterested = props.interestList.includes(userCtx.userId);
+  const isSubscribed = props.subscribeList.includes(userCtx.userId);
   const handleGigSelect = (e) => {
     // e.target.classList.add("selected");
     props.setGigSelect(props.id);
@@ -18,7 +25,13 @@ const GigListingEntry = (props) => {
       </div>
       <div className="container d-flex-column">
         <div>
-          <strong>{props.title}</strong>
+          <div className="d-flex justify-content-between">
+            <strong>{props.title}</strong>
+            <div className="useris">
+              {isInterested && `⭐`}
+              {isSubscribed && `✅`}
+            </div>
+          </div>
         </div>
         <div>
           {new Intl.DateTimeFormat("en-GB", {

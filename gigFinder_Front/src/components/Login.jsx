@@ -78,7 +78,7 @@ const Login = (props) => {
         setMessage("Registration Successful");
       } else {
         console.log(res.data);
-        setMessage(res.data);
+        setMessage("invalid username and/or password");
       }
     } else if (role === "provider") {
       const res = await fetchData("/auth/p/register", "PUT", {
@@ -125,19 +125,20 @@ const Login = (props) => {
             placeholder="password"
           ></input>
         </div>
-        <div style={{ padding: "20px" }}>
-          <select
-            className={`${styles.logininput}`}
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          >
-            <option value="user">User</option>
-            <option value="provider">Provider</option>
-          </select>
-        </div>
+
         {showRegistration && (
           <>
+            <div style={{ padding: "20px" }}>
+              <select
+                className={`${styles.logininput}`}
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
+              >
+                <option value="user">User</option>
+                <option value="provider">Provider</option>
+              </select>
+            </div>
             <div style={{ padding: "5px 20px 5px", width: "55%" }}>
               <input
                 ref={nameRef}
@@ -155,12 +156,12 @@ const Login = (props) => {
               ></input>
             </div>
             <div style={{ padding: "5px", width: "75%" }}>
-              <input
+              <textarea
                 ref={bioRef}
                 type="text"
                 className={`${styles.logininput}`}
                 placeholder="bio"
-              ></input>
+              ></textarea>
             </div>
             {/* <UploadWidget></UploadWidget> */}
             <div style={{ padding: "5px" }}>
@@ -181,47 +182,42 @@ const Login = (props) => {
             </div>
           </>
         )}
-        <div style={{ padding: "0px" }}>
+        <div style={{ padding: "0px" }} className="justify-content-around">
           {!showRegistration && (
             <>
-              {role === "user" ? (
+              <div>
                 <button
                   onClick={() => {
                     handleUserLogin();
                   }}
                   className={`${styles.loginbutton}`}
                 >
-                  Login
+                  Login as User
                 </button>
-              ) : (
+
                 <button
                   onClick={() => {
                     handleProviderLogin();
                   }}
-                  className={`${styles.loginbutton}`}
+                  className={`${styles.loginbutton} ${styles.prov}`}
                 >
-                  Login
+                  Login as Provider
                 </button>
-              )}
-              <button
-                onClick={() => {
-                  setShowRegistration(true);
-                }}
-                className={`${styles.loginbutton} ${styles.reg}`}
-              >
-                Register
-              </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => {
+                    setShowRegistration(true);
+                  }}
+                  className={`${styles.loginbutton} ${styles.reg}`}
+                >
+                  Register
+                </button>
+              </div>
             </>
           )}
         </div>
         <p>{message}</p>
-        <button
-          onClick={() => {
-            props.setShowLogin(false);
-          }}
-        >
-          debug
-        </button>
       </div>
     </div>
   );

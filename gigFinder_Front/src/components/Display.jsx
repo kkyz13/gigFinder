@@ -42,10 +42,12 @@ const Display = () => {
     }
   };
 
+  //initial gig list display
   useEffect(() => {
     allGigsGet();
   }, []);
 
+  //redo gig list upon login
   useEffect(() => {
     if (role === "provider") {
       getProviderGigs();
@@ -58,6 +60,7 @@ const Display = () => {
     setRole("");
     setUserId("");
     setUserEmail("");
+    setShowUserProf(false);
     setShowLogin(true);
   };
 
@@ -117,7 +120,7 @@ const Display = () => {
             role === "provider" ? "providerbg" : ""
           }`}
         >
-          <p className="display-6">gigFinder</p>
+          <span className="display-6">gigFinder</span>
           {accessToken && (
             <div>
               {userEmail}:
@@ -143,6 +146,8 @@ const Display = () => {
                     address={entry.address}
                     description={entry.description}
                     dateTime={entry.dateTimeStart}
+                    interestList={entry.interestUserList}
+                    subscribeList={entry.subscribeUserList}
                     setGigSelect={setGigSelect}
                   ></GigListingEntry>
                 );
@@ -153,7 +158,10 @@ const Display = () => {
           </div>
           {showLogin && <Login setShowLogin={setShowLogin}></Login>}
           {!showLogin && role === "user" && (
-            <GigDetails entryId={gigSelect}></GigDetails>
+            <GigDetails
+              entryId={gigSelect}
+              allGigsGet={allGigsGet}
+            ></GigDetails>
           )}
           {!showLogin && role === "provider" && (
             <GigCanvas
