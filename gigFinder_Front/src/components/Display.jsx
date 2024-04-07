@@ -111,6 +111,7 @@ const Display = () => {
             // email={props.email}
             handleLogOut={handleLogOut}
             setShowUserProf={setShowUserProf}
+            setGigSelect={setGigSelect}
           ></ProviderProfileModal>
         )}
         <div
