@@ -53,6 +53,52 @@
   float: right;
 }
 
+.gigButton {
+  margin-right: 0.8rem;
+}
+
+.actionButton {
+  color: white;
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.green {
+  background-color: hwb(118 51% 19%);
+}
+
+.yellow {
+  background-color: #cec406;
+}
+
+.orange {
+  background-color: hsl(33, 48%, 59%);
+}
+
+.red {
+  background-color: #cf8383;
+}
+
+.interested {
+  background-color: rgb(254, 251, 222);
+  height: auto;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.subscribed {
+  background-color: rgb(221, 255, 211);
+  height: auto;
+  padding: 0.8rem;
+}
+
+.hosted {
+  background-color: rgb(206, 208, 236);
+  height: auto;
+  padding: 0.8rem;
+}
+
 @media (min-width: 600px) {
   .modal {
     left: calc(20%);

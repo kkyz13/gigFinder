@@ -127,34 +127,46 @@ const OverLay = (props) => {
                 src="../../img/avatars/avatar_0002_blue.jpg"
               />
             )}
-            <label>name:</label>
-            <input
-              id="name"
-              type="text"
-              value={updateProviderProfile.name}
-              onChange={handleChange}
-            ></input>
-            <label>biography:</label>
-            <input
-              id="biography"
-              type="text"
-              value={updateProviderProfile.biography}
-              onChange={handleChange}
-            ></input>
-            <label>phoneNumber:</label>
-            <input
-              id="phoneNumber"
-              type="text"
-              value={updateProviderProfile.phoneNumber}
-              onChange={handleChange}
-            ></input>
-            <label>email:</label>
-            <input
-              id="email"
-              type="text"
-              value={updateProviderProfile.email}
-              onChange={handleChange}
-            ></input>
+            <div className="form-group mb-2">
+              <label className="col-2 align-top">name:</label>
+              <input
+                className="col-5"
+                id="name"
+                type="text"
+                value={updateProviderProfile.name}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-group mb-2">
+              <label className="col-2 align-top">biography:</label>
+              <textarea
+                className="col-5"
+                id="biography"
+                type="text"
+                value={updateProviderProfile.biography}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <div className="form-group mb-2">
+              <label className="col-2 align-top">phoneNumber:</label>
+              <input
+                className="col-5"
+                id="phoneNumber"
+                type="text"
+                value={updateProviderProfile.phoneNumber}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div className="form-group mb-2">
+              <label className="col-2 align-top">email:</label>
+              <input
+                className="col-5"
+                id="email"
+                type="text"
+                value={updateProviderProfile.email}
+                onChange={handleChange}
+              ></input>
+            </div>
             {/* <p>interested: </p>
             {userInterestGigsList.length > 0 ? (
               userInterestGigsList.map((item) => <p>{item.title}</p>)
@@ -170,6 +182,7 @@ const OverLay = (props) => {
           </div>
           <div className={styles.actions}>
             <button
+              className={`${styles.actionButton} ${styles.green}`}
               onClick={() => {
                 console.log(userCtx.userId);
                 callUpdateProviderProfile(userCtx.userId);
@@ -178,6 +191,7 @@ const OverLay = (props) => {
               Save
             </button>
             <button
+              className={`${styles.actionButton} ${styles.yellow}`}
               onClick={() => {
                 setIsUpdatePressed(false);
                 setUpdateProviderProfile({
@@ -191,6 +205,7 @@ const OverLay = (props) => {
               Cancel Update
             </button>
             <button
+              className={`${styles.actionButton} ${styles.orange}`}
               onClick={() => {
                 props.setShowUserProf(false);
               }}
@@ -198,6 +213,7 @@ const OverLay = (props) => {
               Close Window
             </button>
             <button
+              className={`${styles.actionButton} ${styles.red}`}
               onClick={() => {
                 props.handleLogOut(true);
               }}
@@ -221,28 +237,62 @@ const OverLay = (props) => {
                 src="../../img/avatars/avatar_0002_blue.jpg"
               />
             )}
-            <p>name: {providerProfile.name}</p>
-            <p>biography: {providerProfile.biography}</p>
-            <p>phone number: {providerProfile.phoneNumber}</p>
-            <p>email: {providerProfile.email}</p>
+
+            <div className="row">
+              <div className="col-3">
+                <p>name:</p>
+              </div>
+              <div className="col">
+                <p>{providerProfile.name}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-3">
+                <p>biography:</p>
+              </div>
+              <div className="col">
+                <p>{providerProfile.biography}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-3">
+                <p>phoneNumber:</p>
+              </div>
+              <div className="col">
+                <p>{providerProfile.phoneNumber}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-3">
+                <p>email:</p>
+              </div>
+              <div className="col">
+                <p>{providerProfile.email}</p>
+              </div>
+            </div>
+
             <p>hosted gigs: </p>
-            {hostGigsList.length > 0 ? (
-              hostGigsList.map((item) => (
-                <button
-                  onClick={() => {
-                    props.setShowUserProf(false);
-                    props.setGigSelect(item._id);
-                  }}
-                >
-                  {item.title}
-                </button>
-              ))
-            ) : (
-              <p>none</p>
-            )}
+            <div className={`${styles.hosted}`}>
+              {hostGigsList.length > 0 ? (
+                hostGigsList.map((item) => (
+                  <button
+                    className={`${styles.gigButton}`}
+                    onClick={() => {
+                      props.setShowUserProf(false);
+                      props.setGigSelect(item._id);
+                    }}
+                  >
+                    {item.title}
+                  </button>
+                ))
+              ) : (
+                <p>none</p>
+              )}
+            </div>
           </div>
           <div className={styles.actions}>
             <button
+              className={`${styles.actionButton} ${styles.green}`}
               onClick={() => {
                 setIsUpdatePressed(true);
               }}
@@ -253,6 +303,7 @@ const OverLay = (props) => {
               Delete Profile
             </button> */}
             <button
+              className={`${styles.actionButton} ${styles.orange}`}
               onClick={() => {
                 props.setShowUserProf(false);
               }}
@@ -260,6 +311,7 @@ const OverLay = (props) => {
               Close Window
             </button>
             <button
+              className={`${styles.actionButton} ${styles.red}`}
               onClick={() => {
                 props.handleLogOut(true);
               }}
