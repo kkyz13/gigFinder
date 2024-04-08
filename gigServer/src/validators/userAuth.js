@@ -15,6 +15,16 @@ const validateRegistrationData = [
   }),
 ];
 
+const validateLoginData = [
+  body("email", "email is required").not().isEmpty(),
+  body("email", "valid email is required").isEmail(),
+  body("password", "password is required").not().isEmpty(),
+  body("password", "password min is 8 and max is 50").isLength({
+    min: 8,
+    max: 50,
+  }),
+];
+
 // To do make actual validate patch data
 // const validatePatchData = [
 //   // body("name", "name patch error").optional(),
@@ -38,6 +48,7 @@ const validateParamId = [
 
 module.exports = {
   validateRegistrationData,
+  validateLoginData,
   // validatePatchData,
   validateParamId,
 };
