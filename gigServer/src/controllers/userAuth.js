@@ -75,8 +75,8 @@ const refreshUser = async (req, res) => {
 
 const patchUser = async (req, res) => {
   try {
-    // Get Data from refresh Token
-    const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
+    // Get Data from access Token
+    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
     // Double check if profile exist and matches
     if (decoded.id != req.params.id) {
       return res
