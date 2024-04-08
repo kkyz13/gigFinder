@@ -49,7 +49,7 @@ const Login = (props) => {
       const decoded = jwtDecode(res.data.access);
       console.log(decoded);
       userCtx.setRole(decoded.role);
-      userCtx.setUserId(decoded.id);
+      userCtx.setProviderId(decoded.id);
       userCtx.setUserEmail(decoded.email);
       props.setShowLogin(false);
     } else {

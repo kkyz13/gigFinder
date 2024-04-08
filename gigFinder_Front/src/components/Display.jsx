@@ -14,6 +14,7 @@ const Display = () => {
   const [refreshToken, setRefreshToken] = useState("");
   const [role, setRole] = useState("");
   const [userId, setUserId] = useState("");
+  const [providerId, setProviderId] = useState("");
   const [showLogin, setShowLogin] = useState(true);
   const [userEmail, setUserEmail] = useState("");
   const [gigSelect, setGigSelect] = useState("");
@@ -77,6 +78,8 @@ const Display = () => {
           setRole,
           userId,
           setUserId,
+          providerId,
+          setProviderId,
           userEmail,
           setUserEmail,
         }}
@@ -118,6 +121,7 @@ const Display = () => {
             setGigSelect={setGigSelect}
           ></ProviderProfileModal>
         )}
+
         <div
           className={`topbar d-flex justify-content-between align-items-center g-0 m-0 ${
             role === "provider" ? "providerbg" : ""
@@ -164,6 +168,9 @@ const Display = () => {
             <GigDetails
               entryId={gigSelect}
               allGigsGet={allGigsGet}
+              handleLogOut={handleLogOut}
+              setGigSelect={setGigSelect}
+              setShowUserProf={setShowUserProf}
             ></GigDetails>
           )}
           {!showLogin && role === "provider" && (

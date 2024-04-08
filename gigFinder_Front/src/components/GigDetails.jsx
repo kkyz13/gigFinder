@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import UserContext from "../context/user";
 import useFetch from "../hooks/useFetch";
+import ProviderProfileModal from "./ProviderProfileModal";
 
 const GigDisplay = (props) => {
   //------------required----------------//
@@ -10,6 +11,8 @@ const GigDisplay = (props) => {
   const [noLink, setNoLink] = useState(false);
   const [isInterested, setIsInterested] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [showProviderProfForUser, setShowProviderProfForUser] = useState(false);
+  const [updateDisabled, setUpdateDisabled] = useState(false);
   const titleRef = useRef();
   const dateRef = useRef();
   const timeRef = useRef();
@@ -189,6 +192,22 @@ const GigDisplay = (props) => {
   //---------------------------------RENDER BLOCK--------------------------------------------------//
   return (
     <div className="col-6 gigdisplay">
+      {showProviderProfForUser && (
+        <ProviderProfileModal
+          // id={props.id}
+          // name={props.name}
+          // bio={props.bio}
+          // phoneNumber={props.phoneNumber}
+          // email={props.email}
+
+          handleLogOut={props.handleLogOut}
+          // setShowUserProf={props.setShowUserProf}
+          setGigSelect={props.setGigSelect}
+          setShowProviderProfForUser={setShowProviderProfForUser}
+          updateDisabled={updateDisabled}
+        ></ProviderProfileModal>
+      )}
+
       {firstLoad ? (
         isLoaded ? (
           ""
@@ -266,6 +285,17 @@ const GigDisplay = (props) => {
               </p>
               <p>Bio:</p>{" "}
               <div className="d-inline-flex">{data.author.biography}</div>
+              <button
+                className="seeMoreButton"
+                onClick={() => {
+                  console.log(data.author._id);
+                  userCtx.setProviderId(data.author._id);
+                  setShowProviderProfForUser(true);
+                  setUpdateDisabled(true);
+                }}
+              >
+                See more
+              </button>
             </div>
           </div>
           <div className="d-flex interest container">
