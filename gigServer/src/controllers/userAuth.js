@@ -91,7 +91,23 @@ const patchUser = async (req, res) => {
       if ("biography" in req.body) updateProfile.biography = req.body.biography;
       if ("phoneNumber" in req.body)
         updateProfile.phoneNumber = req.body.phoneNumber;
-      if ("email" in req.body) updateProfile.email = req.body.email;
+
+      // Check if email in patch body, if email is new and if new email already exist in database
+      if ("email" in req.body) {
+        if (req.decoded.email != req.body.email) {
+          const isSameEmailExist = await UserAuthModel.findOne({
+            email: req.body.email,
+          });
+          if (isSameEmailExist) {
+            return res
+              .status(400)
+              .json({ status: "error", msg: "duplicate email" });
+          } else {
+            updateProfile.email = req.body.email;
+          }
+        }
+      }
+
       if ("password" in req.body)
         updateProfile.hash = await bcrypt.hash(req.body.password, 12);
       // Finally update the profile

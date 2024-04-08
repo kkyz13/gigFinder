@@ -8,6 +8,7 @@ const {
 const {
   validateRegistrationData,
   validateLoginData,
+  validatePatchData,
   validateParamId,
 } = require("../validators/userAuth");
 const { errorCheck } = require("../validators/errorCheck");
@@ -17,7 +18,13 @@ const router = express.Router();
 router.put("/register", validateRegistrationData, errorCheck, registerUser);
 router.post("/login", validateLoginData, errorCheck, loginUser);
 router.post("/refresh", authRefresh, errorCheck, refreshUser);
-//Validate for patch user data does not work... yet.
-router.patch("/:id", authUserProvider, validateParamId, errorCheck, patchUser);
+router.patch(
+  "/:id",
+  authUserProvider,
+  validateParamId,
+  validatePatchData,
+  errorCheck,
+  patchUser
+);
 
 module.exports = router;

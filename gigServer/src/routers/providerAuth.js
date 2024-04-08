@@ -8,6 +8,7 @@ const {
 const {
   validateRegistrationData,
   validateLoginData,
+  validatePatchData,
   validateParamId,
 } = require("../validators/userAuth");
 const { errorCheck } = require("../validators/errorCheck");
@@ -23,6 +24,7 @@ router.patch(
   "/:id",
   authUserProvider,
   validateParamId,
+  validatePatchData,
   errorCheck,
   patchProvider
 );

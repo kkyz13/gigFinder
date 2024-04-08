@@ -26,20 +26,16 @@ const validateLoginData = [
 ];
 
 // To do make actual validate patch data
-// const validatePatchData = [
-//   // body("name", "name patch error").optional(),
-//   // body("biography", "biography has a limit of 300 characters")
-//   //   .optional()
-//   //   .isLength({ max: 300 }),
-//   // body("phoneNumber", "phone number patch error").optional(),
-//   // body("email", "email patch error").optional(),
-//   // body("email", "valid email is required").isEmail(),
-//   // body("password", "password patch error").optional(),
-//   // body("password", "password min is 8 and max is 50").isLength({
-//   //   min: 8,
-//   //   max: 50,
-//   // }),
-// ];
+const validatePatchData = [
+  body("biography", "biography has a limit of 300 characters")
+    .optional()
+    .isLength({ max: 300 }),
+  body("email", "valid email is required").optional().isEmail(),
+  body("password", "password min is 8 and max is 50").optional().isLength({
+    min: 8,
+    max: 50,
+  }),
+];
 
 const validateParamId = [
   param("id", "id is required").not().isEmpty(),
@@ -49,6 +45,6 @@ const validateParamId = [
 module.exports = {
   validateRegistrationData,
   validateLoginData,
-  // validatePatchData,
+  validatePatchData,
   validateParamId,
 };
