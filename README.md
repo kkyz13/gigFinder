@@ -25,7 +25,7 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 ### How to use:
 
 ### Planned future enhancements (icebox items).
-- [Mongose docs](https://github.com/users/kkyz13/projects/2/views/1)
+- [gigFinder Project Tracker](https://github.com/users/kkyz13/projects/2/views/1)
 
 
 
