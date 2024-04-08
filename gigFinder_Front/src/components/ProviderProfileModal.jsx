@@ -7,9 +7,9 @@ import useFetch from "../hooks/useFetch";
 const OverLay = (props) => {
   const userCtx = useContext(UserContext);
   const fetchData = useFetch();
+
   const [providerProfile, setProviderProfile] = useState([]);
   const [hostGigsList, setHostGigsList] = useState([]);
-
   const [isUpdatePressed, setIsUpdatePressed] = useState(false);
   const [updateProviderProfile, setUpdateProviderProfile] = useState({
     name: providerProfile.name,
@@ -38,7 +38,7 @@ const OverLay = (props) => {
   };
 
   useEffect(() => {
-    getProviderProfileById(userCtx.userId);
+    getProviderProfileById(userCtx.providerId);
   }, []);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const OverLay = (props) => {
 
       if (res.ok) {
         console.log(res.data);
-        getProviderProfileById(userCtx.userId);
+        getProviderProfileById(userCtx.providerId);
         setIsUpdatePressed(false);
       }
     } catch (error) {
@@ -184,8 +184,8 @@ const OverLay = (props) => {
             <button
               className={`${styles.actionButton} ${styles.green}`}
               onClick={() => {
-                console.log(userCtx.userId);
-                callUpdateProviderProfile(userCtx.userId);
+                console.log(userCtx.providerId);
+                callUpdateProviderProfile(userCtx.providerId);
               }}
             >
               Save
@@ -226,7 +226,7 @@ const OverLay = (props) => {
         /* ======================================== view provider profile ======================================== */
         <div className={`${styles.board} ${styles.modal}`}>
           <header className={styles.header}>
-            <h3>My Profile</h3>
+            <h3>Profile</h3>
           </header>
           <div className={styles.content}>
             {providerProfile.profilePic ? (
@@ -277,9 +277,19 @@ const OverLay = (props) => {
                 hostGigsList.map((item) => (
                   <button
                     className={`${styles.gigButton}`}
+                    // onClick={() => {
+                    //   props.setShowUserProf(false);
+                    //   props.setGigSelect(item._id);
+                    // }}
+
                     onClick={() => {
-                      props.setShowUserProf(false);
-                      props.setGigSelect(item._id);
+                      if (userCtx.role === "user") {
+                        props.setShowProviderProfForUser(false);
+                        props.setGigSelect(item._id);
+                      } else {
+                        props.setShowUserProf(false);
+                        props.setGigSelect(item._id);
+                      }
                     }}
                   >
                     {item.title}
@@ -293,6 +303,7 @@ const OverLay = (props) => {
           <div className={styles.actions}>
             <button
               className={`${styles.actionButton} ${styles.green}`}
+              disabled={props.updateDisabled}
               onClick={() => {
                 setIsUpdatePressed(true);
               }}
@@ -305,7 +316,9 @@ const OverLay = (props) => {
             <button
               className={`${styles.actionButton} ${styles.orange}`}
               onClick={() => {
-                props.setShowUserProf(false);
+                userCtx.role === "user"
+                  ? props.setShowProviderProfForUser(false)
+                  : props.setShowUserProf(false);
               }}
             >
               Close Window
@@ -331,7 +344,7 @@ const OverLay = (props) => {
             <p>We hate to see you go</p>
           </div>
           <div className={styles.actions}>
-            <button onClick={() => deleteUserProfile(userCtx.userId)}>
+            <button onClick={() => deleteUserProfile(userCtx.providerId)}>
               Confirm Delete
             </button>
             <button
@@ -368,6 +381,8 @@ const ProviderProfileModal = (props) => {
           setShowUserProf={props.setShowUserProf}
           handleLogOut={props.handleLogOut}
           setGigSelect={props.setGigSelect}
+          setShowProviderProfForUser={props.setShowProviderProfForUser}
+          updateDisabled={props.updateDisabled}
         />,
         document.querySelector("#modal-root")
       )}

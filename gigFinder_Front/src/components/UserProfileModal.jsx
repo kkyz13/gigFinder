@@ -224,7 +224,7 @@ const OverLay = (props) => {
         /* ======================================== view user profile ======================================== */
         <div className={`${styles.board} ${styles.modal}`}>
           <header className={styles.header}>
-            <h3>My Profile</h3>
+            <h3>Profile</h3>
           </header>
           <div className={styles.content}>
             {userProfile.profilePic ? (
