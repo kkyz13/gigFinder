@@ -1,5 +1,6 @@
 const GigsModel = require("../models/Gigs");
 const ProviderAuthModel = require("../models/ProviderAuth");
+const UserAuthModel = require("../models/UserAuth");
 const jwt = require("jsonwebtoken");
 
 const getAllGigs = async (req, res) => {
@@ -14,7 +15,10 @@ const getAllGigs = async (req, res) => {
 
 const getGigById = async (req, res) => {
   try {
-    const gig = await GigsModel.findById(req.params.id).populate("author");
+    const gig = await GigsModel.findById(req.params.id).populate(
+      "author interestUserList subscribeUserList",
+      "name phoneNumber email biography"
+    );
     res.json(gig);
   } catch (error) {
     console.error(error.message);

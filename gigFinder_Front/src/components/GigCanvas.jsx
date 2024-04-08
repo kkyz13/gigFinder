@@ -18,6 +18,9 @@ const GigCanvas = (props) => {
   const descriptionRef = useRef();
   const [imgUrl, setImgUrl] = useState("");
   const [message, setMessage] = useState("");
+  const [showInterestUser, setShowInterestUser] = useState("false");
+  const [showSubscribeUser, setShowSubscribeUser] = useState("false");
+
   //--------------------on mount------------------------//
   const [entryId, setEntryId] = useState("");
   const [data, setData] = useState();
