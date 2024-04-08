@@ -66,7 +66,7 @@ const OverLay = (props) => {
   const callUpdateUserProfile = async (id) => {
     try {
       let body = {
-        refresh: userCtx.refreshToken,
+        access: userCtx.accessToken,
         name: updateUserProfile.name.trim(),
         email: updateUserProfile.email.trim(),
       };
