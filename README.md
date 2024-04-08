@@ -15,7 +15,7 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 
 #### APIs used:
 
-- [Picture API]()
+- [Picture API](https://cloudinary.com)
 
 #### Resources:
 - [Mongose docs](https://mongoosejs.com/docs/) 
