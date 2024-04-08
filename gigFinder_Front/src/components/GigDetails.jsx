@@ -50,11 +50,11 @@ const GigDisplay = (props) => {
         "/api/gigs/usermod/" + props.entryId,
         "PUT",
         {
-          refresh: userCtx.refreshToken,
+          access: userCtx.accessToken,
           id: userCtx.userId,
           list: "interestUserList",
         },
-        userCtx.refreshToken
+        userCtx.accessToken
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
@@ -74,11 +74,11 @@ const GigDisplay = (props) => {
         "/api/gigs/usermod/" + props.entryId,
         "DELETE",
         {
-          refresh: userCtx.refreshToken,
+          access: userCtx.accessToken,
           id: userCtx.userId,
           list: "interestUserList",
         },
-        userCtx.refreshToken
+        userCtx.accessToken
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
@@ -98,11 +98,11 @@ const GigDisplay = (props) => {
         "/api/gigs/usermod/" + props.entryId,
         "PUT",
         {
-          refresh: userCtx.refreshToken,
+          access: userCtx.accessToken,
           id: userCtx.userId,
           list: "subscribeUserList",
         },
-        userCtx.refreshToken
+        userCtx.accessToken
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
@@ -122,11 +122,11 @@ const GigDisplay = (props) => {
         "/api/gigs/usermod/" + props.entryId,
         "DELETE",
         {
-          refresh: userCtx.refreshToken,
+          access: userCtx.accessToken,
           id: userCtx.userId,
           list: "subscribeUserList",
         },
-        userCtx.refreshToken
+        userCtx.accessToken
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
