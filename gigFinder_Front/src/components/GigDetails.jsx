@@ -153,6 +153,8 @@ const GigDisplay = (props) => {
   //and this waits for IsLoaded to be true to assign all the necessary value for display
   useEffect(() => {
     if (isLoaded) {
+      setIsInterested(false);
+      setIsSubscribed(false);
       titleRef.current.value = data.title;
       // authorRef.current.value = data.author.name;
       const d = new Date(data.dateTimeStart);
@@ -175,18 +177,19 @@ const GigDisplay = (props) => {
         setNoLink(true);
       }
       descriptionRef.current.value = data.description;
-
+      console.log(data.interestUserList);
+      console.log(userCtx.userId);
       //check if user is already inside the interest/subscribe list
-      if (data.interestUserList.includes(userCtx.userId)) {
-        setIsInterested(true);
-      } else {
-        setIsInterested(false);
-      }
-      if (data.subscribeUserList.includes(userCtx.userId)) {
-        setIsSubscribed(true);
-      } else {
-        setIsSubscribed(false);
-      }
+      data.interestUserList.map((entry) => {
+        if (entry._id === userCtx.userId) {
+          setIsInterested(true);
+        }
+      });
+      data.subscribeUserList.map((entry) => {
+        if (entry._id === userCtx.userId) {
+          setIsSubscribed(true);
+        }
+      });
     }
   }, [isLoaded]);
   //---------------------------------RENDER BLOCK--------------------------------------------------//

@@ -289,7 +289,7 @@ const GigCanvas = (props) => {
       {isLoaded ? (
         <div className="container">
           <div
-            className="interest"
+            className="interest clickable"
             onClick={() => {
               setShowInterestUser(!showInterestUser);
             }}
@@ -316,7 +316,7 @@ const GigCanvas = (props) => {
             )}
           </div>
           <div
-            className="subscribe"
+            className="subscribe clickable"
             onClick={() => {
               setShowSubscribeUser(!showSubscribeUser);
             }}

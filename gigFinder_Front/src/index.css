@@ -195,7 +195,7 @@ body {
   width: 100%;
   padding: 4px;
   border: solid grey;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .interestbtn {
@@ -215,9 +215,12 @@ body {
   width: 100%;
   padding: 4px;
   border: solid grey;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
+.clickable {
+  cursor: pointer;
+}
 .subscribebtn {
   border: none;
   padding: 5px 20px;

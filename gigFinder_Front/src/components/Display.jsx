@@ -21,6 +21,7 @@ const Display = () => {
   const [gigsArr, setGigsArr] = useState([]);
   const fetchData = useFetch();
 
+  console.log(userId);
   const allGigsGet = async () => {
     const res = await fetchData("/api/gigs", undefined, undefined, undefined);
     if (res.ok) {
@@ -32,7 +33,7 @@ const Display = () => {
 
   const getProviderGigs = async () => {
     const res = await fetchData(
-      "/profile/p/" + userId,
+      "/profile/p/" + providerId,
       "POST",
       undefined,
       accessToken
