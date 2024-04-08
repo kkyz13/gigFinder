@@ -131,7 +131,7 @@ const Display = () => {
         >
           <span className="display-6">gigFinder</span>
           {accessToken && (
-            <div className="clickable">
+            <div onClick={() => setShowUserProf(true)} className="clickable">
               {userEmail}
               <img
                 src="../img/avatars/avatar_0002_blue.jpg"
