@@ -1,7 +1,10 @@
 const { body, param } = require("express-validator");
 
 const validateRegistrationData = [
-  body("name", "name is required").not().isEmpty(),
+  body("name", "name is required and limit of 100 characters")
+    .not()
+    .isEmpty()
+    .isLength({ min: 1, max: 100 }),
   body("biography", "biography has a limit of 300 characters")
     .optional()
     .isLength({ max: 300 }),
@@ -27,6 +30,10 @@ const validateLoginData = [
 
 // To do make actual validate patch data
 const validatePatchData = [
+  body("name", "name is required and limit of 100 characters")
+    .not()
+    .optional()
+    .isLength({ min: 1, max: 100 }),
   body("biography", "biography has a limit of 300 characters")
     .optional()
     .isLength({ max: 300 }),

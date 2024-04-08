@@ -2,6 +2,9 @@ const { body, param } = require("express-validator");
 
 const validateAddGigData = [
   body("title", "title is required").not().isEmpty(),
+  body("title", "title must be between 1 and 100 characters")
+    .optional()
+    .isLength({ min: 1, max: 100 }),
   body("dateTimeStart", "start date and time is required").not().isEmpty(),
   body("address", "address must be between 1 and 100 characters")
     .optional()
@@ -12,7 +15,9 @@ const validateAddGigData = [
 ];
 
 const validateUpdateGigData = [
-  body("title", "title is required").optional().not().isEmpty(),
+  body("title", "title must be between 1 and 100 characters")
+    .optional()
+    .isLength({ min: 1, max: 100 }),
   body("dateTimeStart", "start date and time is required")
     .optional()
     .not()
