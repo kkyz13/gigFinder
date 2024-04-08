@@ -10,6 +10,7 @@ const {
   getGigById,
   deleteGigForProvider,
   updateGigForProvider,
+  getAllGigsByDate,
 } = require("../controllers/gigs");
 const {
   validateAddGigData,
@@ -53,6 +54,7 @@ router.patch(
   errorCheck,
   updateGigForProvider
 );
+router.get("/gigs/sortdate", getAllGigsByDate);
 
 router.get("/gigs/usermod/:id", getAllUsersOfGig);
 router.put("/gigs/usermod/:id", putUserInGig);

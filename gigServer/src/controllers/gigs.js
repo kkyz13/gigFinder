@@ -119,10 +119,24 @@ const updateGigForProvider = async (req, res) => {
   }
 };
 
+const getAllGigsByDate = async (req, res) => {
+  try {
+    const allGigs = await GigsModel.find()
+      .sort({ dateTimeStart: -1 })
+      .populate("author", "name")
+      .exec();
+    res.json(allGigs);
+  } catch (error) {
+    console.error(error.message);
+    res.json({ Status: "error", msg: "getting all gigs error" });
+  }
+};
+
 module.exports = {
   getAllGigs,
   getGigById,
   addGigForProvider,
   deleteGigForProvider,
   updateGigForProvider,
+  getAllGigsByDate,
 };
