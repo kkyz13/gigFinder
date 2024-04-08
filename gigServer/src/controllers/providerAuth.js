@@ -60,8 +60,11 @@ const loginProvider = async (req, res) => {
 
 const refreshProvider = async (req, res) => {
   try {
-    const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
-    const claims = { email: decoded.email, role: decoded.role, id: decoded.id };
+    const claims = {
+      email: req.decoded.email,
+      role: req.decoded.role,
+      id: req.decoded.id,
+    };
     const access = jwt.sign(claims, process.env.ACCESS_SECRET, {
       expiresIn: "20m",
       jwtid: uuidv4(),
@@ -75,10 +78,8 @@ const refreshProvider = async (req, res) => {
 
 const patchProvider = async (req, res) => {
   try {
-    // Get Data from access Token
-    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
     // Double check if profile exist and matches
-    if (decoded.id != req.params.id) {
+    if (req.decoded.id != req.params.id) {
       return res
         .status(400)
         .json({ status: "error", msg: "error finding profile to patch" });
@@ -93,7 +94,7 @@ const patchProvider = async (req, res) => {
       if ("email" in req.body) updateProfile.email = req.body.email;
       if ("password" in req.body)
         updateProfile.hash = await bcrypt.hash(req.body.password, 12);
-      // Update profile
+      // Finally update the profile
       await ProviderAuthModel.findByIdAndUpdate(req.params.id, updateProfile);
       res.status(200).json({ status: "ok", msg: "profile updated" });
     }
