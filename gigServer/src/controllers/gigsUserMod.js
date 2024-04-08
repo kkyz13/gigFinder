@@ -21,10 +21,8 @@ const getAllUsersOfGig = async (req, res) => {
 
 const putUserInGig = async (req, res) => {
   try {
-    // Get Data from access Token
-    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
     // Double check if profile exist and matches
-    if (decoded.id != req.body.id) {
+    if (req.decoded.id != req.body.id) {
       return res.status(400).json({
         status: "error",
         msg: "error finding profile to put user into gig list",
@@ -83,7 +81,7 @@ const putUserInGig = async (req, res) => {
         }
       }
       return res.json(
-        decoded.email + " added to " + req.params.id + " " + req.body.list
+        req.decoded.email + " added to " + req.params.id + " " + req.body.list
       );
     }
   } catch (error) {
@@ -96,10 +94,8 @@ const putUserInGig = async (req, res) => {
 
 const deleteUserInGig = async (req, res) => {
   try {
-    // Get Data from access Token
-    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
     // Double check if profile exist and matches
-    if (decoded.id != req.body.id) {
+    if (req.decoded.id != req.body.id) {
       return res.status(400).json({
         status: "error",
         msg: "error finding profile to delete user from gig list",
@@ -166,7 +162,7 @@ const deleteUserInGig = async (req, res) => {
         console.log(req.body.list + "done delete");
       }
       return res.json(
-        decoded.email + " remove " + req.params.id + " " + req.body.list
+        req.decoded.email + " remove " + req.params.id + " " + req.body.list
       );
     }
   } catch (error) {

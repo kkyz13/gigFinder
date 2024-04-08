@@ -56,8 +56,23 @@ router.patch(
 );
 router.get("/gigs/sortdate", getAllGigsByDate);
 
-router.get("/gigs/usermod/:id", getAllUsersOfGig);
-router.put("/gigs/usermod/:id", putUserInGig);
-router.delete("/gigs/usermod/:id", deleteUserInGig);
+router.get(
+  "/gigs/usermod/:id",
+  authUserProvider,
+  validateIdInParams,
+  getAllUsersOfGig
+);
+router.put(
+  "/gigs/usermod/:id",
+  authUserProvider,
+  validateIdInParams,
+  putUserInGig
+);
+router.delete(
+  "/gigs/usermod/:id",
+  authUserProvider,
+  validateIdInParams,
+  deleteUserInGig
+);
 
 module.exports = router;
