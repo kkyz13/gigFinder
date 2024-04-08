@@ -253,3 +253,13 @@ body {
   border-radius: 5px;
   background-color: #cf8383;
 }
+
+/* ================================= GigDetails =========================================*/
+.seeMoreButton {
+  float: right;
+  border: none;
+  padding: 5px 20px;
+  background-color: rgb(178, 211, 241);
+  border-radius: 15px;
+  font-weight: 600;
+}
