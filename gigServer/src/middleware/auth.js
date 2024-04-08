@@ -19,6 +19,25 @@ const authUserProvider = (req, res, next) => {
   }
 };
 
+const authRefresh = (req, res, next) => {
+  if (!("authorization" in req.headers)) {
+    return res.status(400).json({ status: "error", msg: "no token found" });
+  }
+  const refreshToken = req.headers["authorization"].replace("Bearer ", "");
+  if (refreshToken) {
+    try {
+      const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+      req.decoded = decoded;
+      next();
+    } catch (error) {
+      console.error(error.message);
+      return res.status(401).json({ status: "error", msg: "unauthorized" });
+    }
+  } else {
+    return res.status(403).json({ status: "error", msg: "missing token" });
+  }
+};
+
 const authAdmin = (req, res, next) => {
   if (!("authorization" in req.headers)) {
     return res.status(400).json({ status: "error", msg: "no token found" });
@@ -43,4 +62,4 @@ const authAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { authUserProvider, authAdmin };
+module.exports = { authUserProvider, authRefresh, authAdmin };
