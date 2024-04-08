@@ -18,8 +18,8 @@ const GigCanvas = (props) => {
   const descriptionRef = useRef();
   const [imgUrl, setImgUrl] = useState("");
   const [message, setMessage] = useState("");
-  const [showInterestUser, setShowInterestUser] = useState("false");
-  const [showSubscribeUser, setShowSubscribeUser] = useState("false");
+  const [showInterestUser, setShowInterestUser] = useState(false);
+  const [showSubscribeUser, setShowSubscribeUser] = useState(false);
 
   //--------------------on mount------------------------//
   const [entryId, setEntryId] = useState("");
@@ -153,6 +153,8 @@ const GigCanvas = (props) => {
 
   useEffect(() => {
     if (isLoaded) {
+      setShowInterestUser(false);
+      setShowSubscribeUser(false);
       setEntryId(props.entryId);
       setMessage("You are updating a gig");
       setImgUrl(data.pic);
@@ -166,8 +168,6 @@ const GigCanvas = (props) => {
         hour: "2-digit",
         minute: "2-digit",
       });
-      console.log(dateRef.current.value);
-      console.log(timeRef.current.value);
       if (data.address !== "") {
         addressRef.current.value = data.address;
       } else {
@@ -285,20 +285,65 @@ const GigCanvas = (props) => {
           </div>
         )}
       </div>
-      <div className="centered">{message}</div>
+      <div className="display-6 centered">{message}</div>
       {isLoaded ? (
-        <>
-          <div className="d-flex interest container">
-            {data.interestUserList.length}{" "}
-            {data.interestUserList.length === 1 ? "person " : "people "}
-            interested!
+        <div className="container">
+          <div
+            className="interest"
+            onClick={() => {
+              setShowInterestUser(!showInterestUser);
+            }}
+          >
+            <div className="row">
+              <div className="col">
+                {data.interestUserList.length}{" "}
+                {data.interestUserList.length === 1 ? "person " : "people "}
+                interested!
+              </div>
+            </div>
+            {showInterestUser && (
+              <>
+                {data.interestUserList.map((entry) => {
+                  return (
+                    <div className="row m-1">
+                      <div className="col">{`${entry.name}`}</div>
+                      <div className="col">{`${entry.phoneNumber}`}</div>
+                      <div className="col">{`${entry.email}`}</div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
-          <div className="d-flex subscribe container">
-            {data.subscribeUserList.length}{" "}
-            {data.subscribeUserList.length === 1 ? "person " : "people "}
-            going!
+          <div
+            className="subscribe"
+            onClick={() => {
+              setShowSubscribeUser(!showSubscribeUser);
+            }}
+          >
+            {" "}
+            <div className="row">
+              <div className="col">
+                {data.subscribeUserList.length}{" "}
+                {data.subscribeUserList.length === 1 ? "person " : "people "}
+                going!
+              </div>
+            </div>
+            {showSubscribeUser && (
+              <>
+                {data.subscribeUserList.map((entry) => {
+                  return (
+                    <div className="row m-1">
+                      <div className="col">{`${entry.name}`}</div>
+                      <div className="col">{`${entry.phoneNumber}`}</div>
+                      <div className="col">{`${entry.email}`}</div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
-        </>
+        </div>
       ) : (
         ""
       )}
