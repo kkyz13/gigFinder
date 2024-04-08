@@ -131,6 +131,16 @@ const seedProvider = async (req, res) => {
         hash: "$2b$12$bd.zae72JkHOnTAlom9G9eAwlhk.Nxkeq7Hvx37Z6k23Tzz72HLou",
         hostGigsList: ["660e48cc49b4ea2639d81bcd"],
       },
+      {
+        _id: "66138bd854d75d0a99142ee3",
+        name: "Admin",
+        biography: "Admin",
+        phoneNumber: "12345678",
+        email: "admin@admin.com",
+        hash: "$2b$12$c8MKeiaLmCRztyrFwZzbOeDssnLQ2SitGBkFxaAMLZYFnzAYxwLYq",
+        //  "password": "password"
+        hostGigsList: [],
+      },
     ]);
     res.status(200).json({ status: "ok", msg: "provider seeded!" });
   } catch (error) {}
