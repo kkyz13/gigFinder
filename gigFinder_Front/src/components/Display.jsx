@@ -40,6 +40,7 @@ const Display = () => {
     );
     if (res.ok) {
       console.log(res.data);
+      setGigSelect("");
       setGigsArr(res.data.hostGigsList);
     }
   };
@@ -130,8 +131,8 @@ const Display = () => {
         >
           <span className="display-6">gigFinder</span>
           {accessToken && (
-            <div>
-              {userEmail}:
+            <div className="clickable">
+              {userEmail}
               <img
                 src="../img/avatars/avatar_0002_blue.jpg"
                 className="profileimg"

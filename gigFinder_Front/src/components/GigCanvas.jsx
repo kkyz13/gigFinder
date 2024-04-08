@@ -54,7 +54,7 @@ const GigCanvas = (props) => {
   const putNewGig = async () => {
     try {
       const res = await fetchData(
-        "/api/gigs/p/" + userCtx.userId,
+        "/api/gigs/p/" + userCtx.providerId,
         "PUT",
         {
           pic: imgUrl,
