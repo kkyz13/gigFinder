@@ -28,6 +28,8 @@ const GigListingEntry = (props) => {
           <div className="d-flex justify-content-between">
             <strong>{props.title}</strong>
             <div className="useris">
+              {userCtx.role === "provider" &&
+                `${props.interestList.length}⭐ | ${props.subscribeList.length}✅`}
               {isInterested && `⭐`}
               {isSubscribed && `✅`}
             </div>
