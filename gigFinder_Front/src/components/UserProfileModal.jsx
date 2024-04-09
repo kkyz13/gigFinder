@@ -129,7 +129,7 @@ const OverLay = (props) => {
               />
             )}
             <div className="form-group mb-2">
-              <label className="col-2 align-top">name:</label>
+              <label className="col-3 align-top">name:</label>
               <input
                 className="col-5"
                 id="name"
@@ -139,9 +139,9 @@ const OverLay = (props) => {
               ></input>
             </div>
             <div className="form-group mb-2">
-              <label className="col-2 align-top">biography:</label>
+              <label className="col-3 align-top">biography:</label>
               <textarea
-                className="col-5"
+                className={`col-5 ${styles.biography}`}
                 id="biography"
                 type="text"
                 value={updateUserProfile.biography}
@@ -149,7 +149,7 @@ const OverLay = (props) => {
               ></textarea>
             </div>
             <div className="form-group mb-2">
-              <label className="col-2 align-top">phoneNumber:</label>
+              <label className="col-3 align-top">phone number:</label>
               <input
                 className="col-5"
                 id="phoneNumber"
@@ -159,7 +159,7 @@ const OverLay = (props) => {
               ></input>
             </div>
             <div className="form-group mb-2">
-              <label className="col-2 align-top">email:</label>
+              <label className="col-3 align-top">email:</label>
               <input
                 className="col-5"
                 id="email"
@@ -236,7 +236,7 @@ const OverLay = (props) => {
               />
             )}
             <div className="row">
-              <div className="col-3">
+              <div className="col-4">
                 <p>name:</p>
               </div>
               <div className="col">
@@ -244,7 +244,7 @@ const OverLay = (props) => {
               </div>
             </div>
             <div className="row">
-              <div className="col-3">
+              <div className="col-4">
                 <p>biography:</p>
               </div>
               <div className="col">
@@ -252,60 +252,62 @@ const OverLay = (props) => {
               </div>
             </div>
             <div className="row">
-              <div className="col-3">
-                <p>phoneNumber:</p>
+              <div className="col-4">
+                <p>phone number:</p>
               </div>
               <div className="col">
                 <p>{userProfile.phoneNumber}</p>
               </div>
             </div>
             <div className="row">
-              <div className="col-3">
+              <div className="col-4">
                 <p>email:</p>
               </div>
               <div className="col">
                 <p>{userProfile.email}</p>
               </div>
             </div>
+            <div className={styles.interestedSubscribedHostedContainer}>
+              <p>interested gigs: </p>
+              <div className={`${styles.interested}`}>
+                {userInterestGigsList.length > 0 ? (
+                  userInterestGigsList.map((item) => (
+                    <button
+                      className={`${styles.gigButton}`}
+                      onClick={() => {
+                        props.setShowUserProf(false);
+                        props.setGigSelect(item._id);
+                      }}
+                    >
+                      {item.title}
+                    </button>
+                  ))
+                ) : (
+                  <p>none</p>
+                )}
+              </div>
 
-            <p>interested: </p>
-            <div className={`${styles.interested}`}>
-              {userInterestGigsList.length > 0 ? (
-                userInterestGigsList.map((item) => (
-                  <button
-                    className={`${styles.gigButton}`}
-                    onClick={() => {
-                      props.setShowUserProf(false);
-                      props.setGigSelect(item._id);
-                    }}
-                  >
-                    {item.title}
-                  </button>
-                ))
-              ) : (
-                <p>none</p>
-              )}
-            </div>
-
-            <p>subscribed: </p>
-            <div className={`${styles.subscribed}`}>
-              {userSubscribeGigsList.length > 0 ? (
-                userSubscribeGigsList.map((item) => (
-                  <button
-                    className={`${styles.gigButton}`}
-                    onClick={() => {
-                      props.setShowUserProf(false);
-                      props.setGigSelect(item._id);
-                    }}
-                  >
-                    {item.title}
-                  </button>
-                ))
-              ) : (
-                <p>none</p>
-              )}
+              <p>subscribed gigs: </p>
+              <div className={`${styles.subscribed}`}>
+                {userSubscribeGigsList.length > 0 ? (
+                  userSubscribeGigsList.map((item) => (
+                    <button
+                      className={`${styles.gigButton}`}
+                      onClick={() => {
+                        props.setShowUserProf(false);
+                        props.setGigSelect(item._id);
+                      }}
+                    >
+                      {item.title}
+                    </button>
+                  ))
+                ) : (
+                  <p>none</p>
+                )}
+              </div>
             </div>
           </div>
+
           <div className={styles.actions}>
             <button
               className={`${styles.actionButton} ${styles.green}`}
