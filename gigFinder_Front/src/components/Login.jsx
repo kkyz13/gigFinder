@@ -27,7 +27,7 @@ const Login = (props) => {
       userCtx.setAccessToken(res.data.access);
       userCtx.setRefreshToken(res.data.refresh);
       const decoded = jwtDecode(res.data.access);
-      console.log(decoded);
+
       userCtx.setRole(decoded.role);
       userCtx.setUserId(decoded.id);
       userCtx.setUserEmail(decoded.email);
@@ -47,7 +47,7 @@ const Login = (props) => {
       userCtx.setAccessToken(res.data.access);
       userCtx.setRefreshToken(res.data.refresh);
       const decoded = jwtDecode(res.data.access);
-      console.log(decoded);
+
       userCtx.setRole(decoded.role);
       userCtx.setProviderId(decoded.id);
       userCtx.setUserEmail(decoded.email);
@@ -77,7 +77,6 @@ const Login = (props) => {
         setShowRegistration(false);
         setMessage("Registration Successful");
       } else {
-        console.log(res.data);
         setMessage("invalid username and/or password");
       }
     } else if (role === "provider") {
