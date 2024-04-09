@@ -170,6 +170,20 @@ body {
   outline: none;
 }
 
+.sorter {
+  position: relative;
+  padding: 2px 12px 8px;
+  border-radius: 50%;
+  rotate: -90deg;
+  font-size: x-large;
+  left: -40px;
+  top: 80vh;
+  border: none;
+  background-color: #d2dbe3;
+}
+.sorter:hover {
+  background-color: #becdf0;
+}
 .linkbtn {
   margin: 2px 5px;
   color: white;

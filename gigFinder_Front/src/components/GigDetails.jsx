@@ -197,6 +197,15 @@ const GigDisplay = (props) => {
   //---------------------------------RENDER BLOCK--------------------------------------------------//
   return (
     <div className="col-6 gigdisplay">
+      <button
+        title="sort by date"
+        className="sorter"
+        onClick={() => {
+          props.allGigsGetByDate();
+        }}
+      >
+        &#10618;
+      </button>
       {showProviderProfForUser && (
         <ProviderProfileModal
           // id={props.id}

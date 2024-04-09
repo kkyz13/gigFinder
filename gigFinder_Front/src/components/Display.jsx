@@ -30,6 +30,19 @@ const Display = () => {
     }
   };
 
+  const allGigsGetByDate = async () => {
+    const res = await fetchData(
+      "/api/gigs/sortdate",
+      undefined,
+      undefined,
+      undefined
+    );
+    if (res.ok) {
+      setGigsArr(res.data);
+    } else {
+      console.log(res);
+    }
+  };
   const getProviderGigs = async () => {
     const res = await fetchData(
       "/profile/p/" + providerId,
@@ -169,6 +182,7 @@ const Display = () => {
             <GigDetails
               entryId={gigSelect}
               allGigsGet={allGigsGet}
+              allGigsGetByDate={allGigsGetByDate}
               handleLogOut={handleLogOut}
               setGigSelect={setGigSelect}
               setShowUserProf={setShowUserProf}
