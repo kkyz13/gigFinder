@@ -310,12 +310,17 @@ const GigCanvas = (props) => {
             </div>
             {showInterestUser && (
               <>
+                <div className="row m-1">
+                  <div className="col-4">Name</div>
+                  <div className="col-4">Phone</div>
+                  <div className="col-4">Email</div>
+                </div>
                 {data.interestUserList.map((entry) => {
                   return (
                     <div className="row m-1">
-                      <div className="col">{`${entry.name}`}</div>
-                      <div className="col">{`${entry.phoneNumber}`}</div>
-                      <div className="col">{`${entry.email}`}</div>
+                      <div className="col transparentwhite">{`${entry.name}`}</div>
+                      <div className="col transparentwhite">{`${entry.phoneNumber}`}</div>
+                      <div className="col transparentwhite">{`${entry.email}`}</div>
                     </div>
                   );
                 })}
@@ -338,12 +343,17 @@ const GigCanvas = (props) => {
             </div>
             {showSubscribeUser && (
               <>
+                <div className="row m-1">
+                  <div className="col-4">Name</div>
+                  <div className="col-4">Phone</div>
+                  <div className="col-4">Email</div>
+                </div>
                 {data.subscribeUserList.map((entry) => {
                   return (
                     <div className="row m-1">
-                      <div className="col">{`${entry.name}`}</div>
-                      <div className="col">{`${entry.phoneNumber}`}</div>
-                      <div className="col">{`${entry.email}`}</div>
+                      <div className="col transparentwhite">{`${entry.name}`}</div>
+                      <div className="col transparentwhite">{`${entry.phoneNumber}`}</div>
+                      <div className="col transparentwhite">{`${entry.email}`}</div>
                     </div>
                   );
                 })}
