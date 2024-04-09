@@ -13,6 +13,7 @@ const GigDisplay = (props) => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [showProviderProfForUser, setShowProviderProfForUser] = useState(false);
   const [updateDisabled, setUpdateDisabled] = useState(false);
+  const [sortDateActive, setSortDateActive] = useState(false);
   const titleRef = useRef();
   const dateRef = useRef();
   const timeRef = useRef();
@@ -69,6 +70,7 @@ const GigDisplay = (props) => {
         setIsInterested(true);
         props.allGigsGet();
       }
+      if (sortDateActive === true) props.allGigsGetByDate();
     } catch (error) {
       console.log("failed to register interest");
       console.log(error);
@@ -92,6 +94,7 @@ const GigDisplay = (props) => {
         setIsInterested(false);
         props.allGigsGet();
       }
+      if (sortDateActive === true) props.allGigsGetByDate();
     } catch (error) {
       console.log("failed to remove interest");
       console.log(error);
@@ -115,6 +118,7 @@ const GigDisplay = (props) => {
         setIsSubscribed(true);
         props.allGigsGet();
       }
+      if (sortDateActive === true) props.allGigsGetByDate();
     } catch (error) {
       console.log("failed to subscribe");
       console.log(error);
@@ -138,6 +142,7 @@ const GigDisplay = (props) => {
         setIsSubscribed(false);
         props.allGigsGet();
       }
+      if (sortDateActive === true) props.allGigsGetByDate();
     } catch (error) {
       console.log("failed to unsubscribe");
       console.log(error);
@@ -192,6 +197,10 @@ const GigDisplay = (props) => {
       });
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (sortDateActive === true) props.allGigsGetByDate();
+  }, [sortDateActive]);
   //---------------------------------RENDER BLOCK--------------------------------------------------//
   return (
     <div className="col-6 gigdisplay">
@@ -199,7 +208,8 @@ const GigDisplay = (props) => {
         title="sort by date"
         className="sorter"
         onClick={() => {
-          props.allGigsGetByDate();
+          setSortDateActive(true);
+          // props.allGigsGetByDate();
         }}
       >
         &#10618;
