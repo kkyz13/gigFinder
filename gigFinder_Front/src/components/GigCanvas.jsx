@@ -27,7 +27,9 @@ const GigCanvas = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [firstLoad, setFirstLoad] = useState(false);
 
-  //---date handler---//
+  const openLink = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
 
   const loadGigDetails = async (id) => {
     setFirstLoad(true);
@@ -153,6 +155,7 @@ const GigCanvas = (props) => {
 
   useEffect(() => {
     if (isLoaded) {
+      setlinkUrl("");
       setShowInterestUser(false);
       setShowSubscribeUser(false);
       setEntryId(props.entryId);
@@ -249,7 +252,11 @@ const GigCanvas = (props) => {
             type="text"
             placeholder="no link provided"
           ></input>
-          <button disabled={linkUrl === "" ? true : false} className="">
+          <button
+            disabled={linkUrl === "" ? true : false}
+            className="linkbtn"
+            onClick={() => openLink(linkUrl)}
+          >
             Test link
           </button>
         </div>

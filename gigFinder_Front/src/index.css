@@ -88,7 +88,6 @@ body {
 }
 .delgigbtn {
   transition: 100ms;
-
   color: white;
   border: none;
   padding: 7px;
@@ -175,10 +174,13 @@ body {
   margin: 2px 5px;
   color: white;
   border: none;
-  padding: 5px 20px;
+  padding: 5px 10px;
   background-color: rgb(48, 94, 151);
-  border-radius: 15px;
+  border-radius: 5px;
   font-weight: 600;
+}
+.linkbtn:disabled {
+  opacity: 65%;
 }
 .authorbio {
   margin: 1rem 0.45rem 0.3rem;

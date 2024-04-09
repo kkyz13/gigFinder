@@ -25,6 +25,9 @@ const GigDisplay = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [firstLoad, setFirstLoad] = useState(false);
 
+  const openLink = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
   const loadGigDetails = async (id) => {
     setFirstLoad(true);
     setIsLoaded(false);
@@ -271,7 +274,11 @@ const GigDisplay = (props) => {
               type="text"
               placeholder="no link provided"
             ></input>
-            <button disabled={noLink} className="">
+            <button
+              disabled={noLink}
+              className="linkbtn"
+              onClick={() => openLink(linkRef.current.value)}
+            >
               open link
             </button>
           </div>
@@ -285,8 +292,7 @@ const GigDisplay = (props) => {
               <p>
                 Contact: <u>{data.author.phoneNumber}</u>
               </p>
-              <p>Bio:</p>{" "}
-              <div className="d-inline-flex">{data.author.biography}</div>
+              <p>Bio:</p> <p>{data.author.biography}</p>
               <button
                 className="seeMoreButton"
                 onClick={() => {
