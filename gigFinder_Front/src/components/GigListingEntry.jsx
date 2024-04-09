@@ -10,7 +10,6 @@ const GigListingEntry = (props) => {
   const isInterested = props.interestList.includes(userCtx.userId);
   const isSubscribed = props.subscribeList.includes(userCtx.userId);
   const handleGigSelect = (e) => {
-    // e.target.classList.add("selected");
     props.setGigSelect(props.id);
   };
   return (
@@ -42,7 +41,6 @@ const GigListingEntry = (props) => {
             timeZone: "Asia/Singapore",
           }).format(d)}
         </div>
-        {/* <div>{d.toLocaleString("en-SG", { timeZone: "Asia/Singapore" })}</div> */}
         <div className="description line-clamp" style={{ Height: "100px" }}>
           {props.description}
         </div>

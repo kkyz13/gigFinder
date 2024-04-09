@@ -1,7 +1,5 @@
 const GigsModel = require("../models/Gigs");
 const ProviderAuthModel = require("../models/ProviderAuth");
-const UserAuthModel = require("../models/UserAuth");
-const jwt = require("jsonwebtoken");
 
 const getAllGigs = async (req, res) => {
   try {

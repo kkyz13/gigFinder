@@ -97,25 +97,8 @@ const Display = () => {
           setUserEmail,
         }}
       >
-        {/* {showUserProf && (
-          <UserProfileModal
-            // id={props.id}
-            // name={props.name}
-            // bio={props.bio}
-            // phoneNumber={props.phoneNumber}
-            // email={props.email}
-            handleLogOut={handleLogOut}
-            setShowUserProf={setShowUserProf}
-          ></UserProfileModal>
-        )} */}
-
         {showUserProf && role === "user" && (
           <UserProfileModal
-            // id={props.id}
-            // name={props.name}
-            // bio={props.bio}
-            // phoneNumber={props.phoneNumber}
-            // email={props.email}
             handleLogOut={handleLogOut}
             setShowUserProf={setShowUserProf}
             setGigSelect={setGigSelect}
@@ -124,11 +107,6 @@ const Display = () => {
 
         {showUserProf && role === "provider" && (
           <ProviderProfileModal
-            // id={props.id}
-            // name={props.name}
-            // bio={props.bio}
-            // phoneNumber={props.phoneNumber}
-            // email={props.email}
             handleLogOut={handleLogOut}
             setShowUserProf={setShowUserProf}
             setGigSelect={setGigSelect}
@@ -161,7 +139,7 @@ const Display = () => {
                     key={entry.id}
                     id={entry._id}
                     title={entry.title}
-                    // author={entry.author.name}
+                    author={entry.author.name}
                     pic={entry.pic}
                     address={entry.address}
                     description={entry.description}

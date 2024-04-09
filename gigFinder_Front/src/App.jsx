@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Display from "./components/Display";
-import UserContext from "./context/user";
 
 function App() {
   return (

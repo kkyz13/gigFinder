@@ -138,7 +138,6 @@ const seedProvider = async (req, res) => {
         phoneNumber: "12345678",
         email: "admin@admin.com",
         hash: "$2b$12$c8MKeiaLmCRztyrFwZzbOeDssnLQ2SitGBkFxaAMLZYFnzAYxwLYq",
-        //  "password": "password"
         hostGigsList: [],
       },
     ]);

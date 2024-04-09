@@ -17,7 +17,6 @@ const OverLay = (props) => {
     phoneNumber: providerProfile.phoneNumber,
     email: providerProfile.email,
   });
-  // const [isDeletePressed, setIsDeletePressed] = useState(false);
 
   const getProviderProfileById = async (id) => {
     const res = await fetchData(
@@ -49,12 +48,6 @@ const OverLay = (props) => {
       email: providerProfile.email,
     });
   }, [providerProfile]);
-
-  // useEffect(() => {
-  //   if (isDeletePressed) {
-  //     // setIsDeletePressed(true);
-  //   }
-  // }, [isDeletePressed]);
 
   const handleChange = (event) => {
     setUpdateProviderProfile((prevState) => {
@@ -92,23 +85,6 @@ const OverLay = (props) => {
       console.log(error);
     }
   };
-
-  // const deleteUserProfile = async (id) => {
-  //   try {
-  //     const res = await fetchData(
-  //       "/auth/u/delete/" + id,
-  //       "DELETE",
-  //       {
-  //         refresh: userCtx.refreshToken,
-  //       },
-  //       userCtx.accessToken
-  //     );
-
-  //     if (res.ok) {
-  //       props.handleLogOut(true);
-  //     }
-  //   } catch (error) {}
-  // };
 
   return (
     <div className={styles.backdrop}>
@@ -167,18 +143,6 @@ const OverLay = (props) => {
                 onChange={handleChange}
               ></input>
             </div>
-            {/* <p>interested: </p>
-            {userInterestGigsList.length > 0 ? (
-              userInterestGigsList.map((item) => <p>{item.title}</p>)
-            ) : (
-              <p>none</p>
-            )}
-            <p>subscribed: </p>
-            {userSubscribeGigsList.length > 0 ? (
-              userSubscribeGigsList.map((item) => <p>{item.title}</p>)
-            ) : (
-              <p>none</p>
-            )} */}
           </div>
           <div className={styles.actions}>
             <button
@@ -281,11 +245,6 @@ const OverLay = (props) => {
                   hostGigsList.map((item) => (
                     <button
                       className={`${styles.gigButton}`}
-                      // onClick={() => {
-                      //   props.setShowUserProf(false);
-                      //   props.setGigSelect(item._id);
-                      // }}
-
                       onClick={() => {
                         if (userCtx.role === "user") {
                           props.setShowProviderProfForUser(false);
@@ -315,9 +274,6 @@ const OverLay = (props) => {
             >
               Update
             </button>
-            {/* <button onClick={() => setIsDeletePressed(true)}>
-              Delete Profile
-            </button> */}
             <button
               className={`${styles.actionButton} ${styles.orange}`}
               onClick={() => {
@@ -339,36 +295,6 @@ const OverLay = (props) => {
           </div>
         </div>
       )}
-
-      {/* {isDeletePressed && (
-        <div className={`${styles.board} ${styles.modal}`}>
-          <header className={styles.header}>
-            <h3>Delete Profile</h3>
-          </header>
-          <div className={styles.content}>
-            <p>We hate to see you go</p>
-          </div>
-          <div className={styles.actions}>
-            <button onClick={() => deleteUserProfile(userCtx.providerId)}>
-              Confirm Delete
-            </button>
-            <button
-              onClick={() => {
-                props.setShowUserProf(false);
-              }}
-            >
-              Close Window
-            </button>
-            <button
-              onClick={() => {
-                props.handleLogOut(true);
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
@@ -378,11 +304,6 @@ const ProviderProfileModal = (props) => {
     <>
       {ReactDOM.createPortal(
         <OverLay
-          //   id={props.id}
-          //   name={props.name}
-          //   bio={props.bio}
-          //   phoneNumber={props.phoneNumber}
-          //   email={props.email}
           setShowUserProf={props.setShowUserProf}
           handleLogOut={props.handleLogOut}
           setGigSelect={props.setGigSelect}
