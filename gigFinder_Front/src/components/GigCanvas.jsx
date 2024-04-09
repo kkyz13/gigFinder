@@ -188,6 +188,7 @@ const GigCanvas = (props) => {
     <div className="col-6 gigcanvas">
       {userCtx.role === "provider" && (
         <button
+          title="Add a new gig"
           onClick={() => {
             newGigInit();
           }}

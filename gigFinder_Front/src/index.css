@@ -42,9 +42,9 @@ body {
 .newgigbtn {
   transition: 0.3s;
   position: absolute;
-  right: 57%;
+  right: 49%;
   bottom: 10%;
-  padding: 1px 12px;
+  padding: 0px 12px 4px;
   border: none;
   border-radius: 45%;
   background-color: #cf8383;
