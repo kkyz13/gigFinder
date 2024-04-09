@@ -66,7 +66,6 @@ const GigDisplay = (props) => {
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
-        console.log("successful PUT");
         setIsInterested(true);
         props.allGigsGet();
       }
@@ -90,7 +89,6 @@ const GigDisplay = (props) => {
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
-        console.log("successful DELETE");
         setIsInterested(false);
         props.allGigsGet();
       }
@@ -114,7 +112,6 @@ const GigDisplay = (props) => {
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
-        console.log("successful PUT");
         setIsSubscribed(true);
         props.allGigsGet();
       }
@@ -138,7 +135,6 @@ const GigDisplay = (props) => {
       );
       if (res.ok) {
         loadGigDetails(props.entryId);
-        console.log("successful DEL");
         setIsSubscribed(false);
         props.allGigsGet();
       }
@@ -307,7 +303,6 @@ const GigDisplay = (props) => {
               <button
                 className="seeMoreButton"
                 onClick={() => {
-                  console.log(data.author._id);
                   userCtx.setProviderId(data.author._id);
                   setShowProviderProfForUser(true);
                   setUpdateDisabled(true);

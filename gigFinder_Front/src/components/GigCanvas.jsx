@@ -50,6 +50,7 @@ const GigCanvas = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.handleLogOut();
     }
   };
 
@@ -99,6 +100,8 @@ const GigCanvas = (props) => {
       if (res.ok) {
         setMessage("Update Gig Successful!");
         props.getProviderGigs();
+      } else if (res.data === "unauthorized") {
+        props.handleLogOut();
       } else {
         setMessage("Something wrong has happened!");
         console.log(res);

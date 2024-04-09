@@ -51,7 +51,6 @@ const Display = () => {
       accessToken
     );
     if (res.ok) {
-      console.log(res.data);
       setGigSelect("");
       setGigsArr(res.data.hostGigsList);
     }
@@ -193,6 +192,7 @@ const Display = () => {
               entryId={gigSelect}
               getProviderGigs={getProviderGigs}
               setGigArr={setGigsArr}
+              handleLogOut={handleLogOut}
             ></GigCanvas>
           )}
         </div>
