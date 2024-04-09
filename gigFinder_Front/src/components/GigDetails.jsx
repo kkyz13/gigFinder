@@ -43,6 +43,8 @@ const GigDisplay = (props) => {
           const data = await res.data;
           setData(data);
           setIsLoaded(true);
+        } else {
+          props.handleLogOut();
         }
       }
     } catch (error) {
