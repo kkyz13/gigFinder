@@ -31,7 +31,6 @@ const validateLoginData = [
 // To do make actual validate patch data
 const validatePatchData = [
   body("name", "name is required and limit of 100 characters")
-    .not()
     .optional()
     .isLength({ min: 1, max: 100 }),
   body("biography", "biography has a limit of 300 characters")
