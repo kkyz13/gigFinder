@@ -49,8 +49,10 @@
 }
 
 .profilePic {
-  width: 120px;
+  width: 150px;
   float: right;
+  /* text-align: right; */
+  /* display: inline; */
 }
 
 .gigButton {
@@ -104,6 +106,14 @@
   background-color: rgb(206, 208, 236);
   height: auto;
   padding: 0.8rem;
+}
+
+.interestedSubscribedHostedContainer {
+  margin-left: 0.7rem;
+}
+
+.biography {
+  height: 8rem;
 }
 
 @media (min-width: 600px) {
