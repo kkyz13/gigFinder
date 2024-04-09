@@ -1,7 +1,6 @@
 import React, { useRef, useContext, useState } from "react";
 import styles from "./Login.module.css";
 import useFetch from "../hooks/useFetch";
-import UploadWidget from "./UploadWidget";
 import UserContext from "../context/user";
 import { jwtDecode } from "jwt-decode";
 
@@ -163,7 +162,6 @@ const Login = (props) => {
                 placeholder="bio"
               ></textarea>
             </div>
-            {/* <UploadWidget></UploadWidget> */}
             <div style={{ padding: "5px" }}>
               <button
                 onClick={() => handleRegistration()}

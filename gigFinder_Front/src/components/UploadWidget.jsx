@@ -11,9 +11,6 @@ const UploadWidget = (props) => {
       {
         cloudName: "dotft2n3n",
         uploadPreset: "wu6af385",
-        // cropping: true,
-        // croppingAspectRatio: true,
-        // showCompletedButton: true,
       },
       function (error, result) {
         console.log(result);
@@ -34,8 +31,6 @@ const UploadWidget = (props) => {
       >
         Upload
       </button>
-      {/* <br></br>
-      <img src={imgurl}></img> */}
     </>
   );
 };

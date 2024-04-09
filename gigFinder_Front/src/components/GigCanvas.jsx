@@ -14,7 +14,6 @@ const GigCanvas = (props) => {
   const dateRef = useRef();
   const timeRef = useRef();
   const addressRef = useRef();
-  // const linkRef = useRef();
   const descriptionRef = useRef();
   const [imgUrl, setImgUrl] = useState("");
   const [message, setMessage] = useState("");
@@ -165,7 +164,6 @@ const GigCanvas = (props) => {
       setMessage("You are updating a gig");
       setImgUrl(data.pic);
       titleRef.current.value = data.title;
-      // authorRef.current.value = data.author.name;
       const d = new Date(data.dateTimeStart);
 
       dateRef.current.value = d.toISOString().slice(0, 10);

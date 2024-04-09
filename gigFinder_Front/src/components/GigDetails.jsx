@@ -162,7 +162,6 @@ const GigDisplay = (props) => {
       setIsInterested(false);
       setIsSubscribed(false);
       titleRef.current.value = data.title;
-      // authorRef.current.value = data.author.name;
       const d = new Date(data.dateTimeStart);
       dateRef.current.value = d.toISOString().slice(0, 10);
       timeRef.current.value = d.toLocaleTimeString([], {
@@ -209,21 +208,13 @@ const GigDisplay = (props) => {
         className="sorter"
         onClick={() => {
           setSortDateActive(true);
-          // props.allGigsGetByDate();
         }}
       >
         &#10618;
       </button>
       {showProviderProfForUser && (
         <ProviderProfileModal
-          // id={props.id}
-          // name={props.name}
-          // bio={props.bio}
-          // phoneNumber={props.phoneNumber}
-          // email={props.email}
-
           handleLogOut={props.handleLogOut}
-          // setShowUserProf={props.setShowUserProf}
           setGigSelect={props.setGigSelect}
           setShowProviderProfForUser={setShowProviderProfForUser}
           updateDisabled={updateDisabled}
