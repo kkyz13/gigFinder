@@ -278,7 +278,7 @@ const GigDisplay = (props) => {
           </div>
           <div className="authorbio">
             About the organizer:
-            <div className="container">
+            <div className="">
               <p>
                 Name: <strong>{data.author.name}</strong>
               </p>
