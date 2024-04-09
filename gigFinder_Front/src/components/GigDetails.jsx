@@ -177,8 +177,7 @@ const GigDisplay = (props) => {
         setNoLink(true);
       }
       descriptionRef.current.value = data.description;
-      console.log(data.interestUserList);
-      console.log(userCtx.userId);
+
       //check if user is already inside the interest/subscribe list
       data.interestUserList.map((entry) => {
         if (entry._id === userCtx.userId) {
@@ -221,7 +220,7 @@ const GigDisplay = (props) => {
         <div className="centered display-6">{`No gig selected. :(`}</div>
       )}
       {isLoaded ? (
-        <div className="detail container row mt-1">
+        <div className="detail container readonly row mt-1">
           <div className="col-4">
             <img
               className="img-thumbnail rounded float-start"

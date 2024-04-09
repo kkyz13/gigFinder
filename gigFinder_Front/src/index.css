@@ -23,6 +23,7 @@ body {
   padding-left: 5px;
   padding-right: 15px;
   text-align: center;
+  user-select: none;
 }
 
 .topbar span {
@@ -162,6 +163,12 @@ body {
 .detail input {
   border: none;
   margin: 2px;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+.detail :read-only {
+  outline: none;
 }
 
 .linkbtn {
