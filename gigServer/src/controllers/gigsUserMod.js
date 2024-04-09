@@ -73,7 +73,7 @@ const putUserInGig = async (req, res) => {
         const isGigInUser = await theUser.subscribeGigsList.includes(
           req.params.id
         );
-        if (isGigInUser) {
+        if (!isGigInUser) {
           await UserAuthModel.findByIdAndUpdate(req.body.id, {
             $push: { subscribeGigsList: req.params.id },
           });
