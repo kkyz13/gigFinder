@@ -10,7 +10,7 @@ Wireframe/proposal of app
 
 ### Technologies Used:
 
-Front End: React, JavaScript, HTML, CSS
+Front End: React, JavaScript, HTML, CSS <br>
 Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,helmet, jsonwebtoken, mongoose, uuid, nodemon
 
 #### APIs used:
@@ -21,6 +21,8 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 - [Mongose docs](https://mongoosejs.com/docs/) 
 - [W3Schools](https://www.w3schools.com/js/)
 - [Mozilla Developer Documentation](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started)
+- [Blackbox AI for understanding and debugging useEffects](https://www.blackbox.ai)
+- [Removing Outline from Forms](https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome)
 
 ### How to use:
 
