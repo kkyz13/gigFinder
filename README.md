@@ -21,6 +21,26 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 
 - [Picture API](https://cloudinary.com)
 
+### How to use:
+
+#### Login/Registration:
+
+![Screenshot 2024-04-09 161405](https://github.com/kkyz13/gigFinder/assets/155720573/9053c283-31e4-4d11-82a4-9fff9c55ac68)
+
+Register as a user or provider (use the dropdown menu)
+
+![Screenshot 2024-04-09 161157](https://github.com/kkyz13/gigFinder/assets/155720573/b3c1784a-be74-4195-b82e-2fc0e49699b3)
+
+Login as a user or provider
+
+#### User:
+![gigFinder_Instructions_user_01](https://github.com/kkyz13/gigFinder/assets/155720573/faf9cbd1-b3d7-4280-808d-b8c3eff31a5b)
+Click on a gig on the left, interact with it on the right
+
+#### Provider : 
+![gigFinder_Instructions_prov_01](https://github.com/kkyz13/gigFinder/assets/155720573/bfd0baf7-8cd9-420d-bbab-c9738629c1fc)
+Check out your existing gigs interests, and create/update gigs on the right
+
 #### Resources:
 - [Mongose docs](https://mongoosejs.com/docs/) 
 - [W3Schools](https://www.w3schools.com/js/)
@@ -30,7 +50,7 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 - [Removing Outline from Forms](https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome)
 - [tooltips for buttons](https://stackoverflow.com/questions/2238239/tooltips-for-button-elements)
 - 
-### How to use:
+
 
 ### Planned future enhancements (icebox items).
 - [gigFinder Project Tracker](https://github.com/users/kkyz13/projects/2/views/1)
