@@ -23,7 +23,7 @@ Back End: bcrpt, cors, dotenv, express, express-rate-limit, express-validator,he
 - [Mozilla Developer Documentation](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started)
 - [Blackbox AI for understanding and debugging useEffects](https://www.blackbox.ai)
 - [Removing Outline from Forms](https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome)
-
+- [tooltips for buttons](https://stackoverflow.com/questions/2238239/tooltips-for-button-elements)
 ### How to use:
 
 ### Planned future enhancements (icebox items).
