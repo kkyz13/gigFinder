@@ -198,20 +198,37 @@ const GigDisplay = (props) => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (sortDateActive === true) props.allGigsGetByDate();
+    if (sortDateActive === true) {
+      props.allGigsGetByDate();
+    } else {
+      props.allGigsGet();
+    }
   }, [sortDateActive]);
   //---------------------------------RENDER BLOCK--------------------------------------------------//
   return (
     <div className="col-6 gigdisplay">
-      <button
-        title="sort by date"
-        className="sorter"
-        onClick={() => {
-          setSortDateActive(true);
-        }}
-      >
-        &#10618;
-      </button>
+      {!sortDateActive ? (
+        <button
+          title="sort by date"
+          className="sorter"
+          onClick={() => {
+            setSortDateActive(true);
+          }}
+        >
+          &#10618;
+        </button>
+      ) : (
+        <button
+          title="reset"
+          className="sorter"
+          onClick={() => {
+            setSortDateActive(false);
+          }}
+        >
+          &#10618;
+        </button>
+      )}
+
       {showProviderProfForUser && (
         <ProviderProfileModal
           handleLogOut={props.handleLogOut}
