@@ -2,7 +2,8 @@
 
 ## For GA SEI-49 Project 3
 
-<img src="https://github.com/kkyz13/gigFinder/assets/155720573/0969e707-f575-4ba7-976f-c8705b4dd656" width="1000px" height=200px>
+
+<img src="https://github.com/kkyz13/gigFinder/assets/155720573/23efd84d-97ed-4d31-93ce-f9cb1b68951f" width="1000px" height=300px>
 
 ### Description
 
