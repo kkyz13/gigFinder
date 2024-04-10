@@ -2,7 +2,7 @@
 
 ## For GA SEI-49 Project 3
 
-<img src="https://github.com/kkyz13/gigFinder/assets/155720573/0969e707-f575-4ba7-976f-c8705b4dd656" width="700px" height=200px>
+<img src="https://github.com/kkyz13/gigFinder/assets/155720573/0969e707-f575-4ba7-976f-c8705b4dd656" width="1000px" height=200px>
 
 ### Description
 
@@ -10,11 +10,11 @@ This web application was created as part of our project for General Assembly's S
 
 It allows providers to list their hosted gigs on the site for users to register interest or subscribe to the gig.
 
-### Screenshot(s):
+### Screenshot(s)
 
 ![Screenshot 2024-04-09 152848](https://github.com/kkyz13/gigFinder/assets/155720573/06043e95-60bd-42ad-b696-9744084542f4)
 
-### Technologies Used:
+### Technologies Used
 
 #### Frontend
 
@@ -39,15 +39,15 @@ It allows providers to list their hosted gigs on the site for users to register 
 - MongoDB
 - mongoose
 
-#### APIs used:
+#### APIs
 
 - [Picture API](https://cloudinary.com)
 
-### Wireframe & Proposal:
+### Getting Started
 
 [Wireframe/proposal of app](https://docs.google.com/presentation/d/1-pWMwRm3kN_ONexkmp4uwbNtbjchvpokQJfq2NDFS5I/edit#slide=id.p)
 
-### Getting Started
+[Public Board](https://github.com/users/kkyz13/projects/2/views/1)
 
 Clone the repository to your local machine
 
@@ -100,7 +100,7 @@ Run the frontend and backend
 npm run dev
 ```
 
-### How to use:
+### How to use
 
 #### Login/Registration:
 
@@ -123,7 +123,7 @@ Edit user profile
 ![gigFinder_Instructions_user_01](https://github.com/kkyz13/gigFinder/assets/155720573/faf9cbd1-b3d7-4280-808d-b8c3eff31a5b)
 Click on a gig on the left, interact with it on the right
 
-#### Provider :
+#### Provider:
 
 ![view_provider_profile](./readme_screenshots/image-2.png)
 View provider profile
