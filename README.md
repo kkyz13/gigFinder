@@ -144,6 +144,7 @@ Check out your existing gigs interests, and create/update gigs on the right
 - [Blackbox AI for understanding and debugging useEffects](https://www.blackbox.ai)
 - [Removing Outline from Forms](https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome)
 - [Tooltips for buttons](https://stackoverflow.com/questions/2238239/tooltips-for-button-elements)
+- [International DateTime Constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)
 
 ### Planned future enhancements (icebox items)
 
